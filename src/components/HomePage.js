@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'; // 导入 FontAwesomeIcon
 import {
@@ -131,10 +131,10 @@ const HomePage = () => {
           <div className="sidebar-footer">
             <p>&copy; 2025 茶叶管理系统</p> {/* 修改版权信息为您的应用名称 */}
             <div className="footer-links">
-              <a href="#" target="_blank" rel="noopener noreferrer">关于我们</a>
-              <a href="#" target="_blank" rel="noopener noreferrer">服务条款</a>
-              <a href="#" target="_blank" rel="noopener noreferrer">隐私政策</a>
-              <a href="#" target="_blank" rel="noopener noreferrer">联系我们</a>
+              <a href="javascript:void(0)" target="_blank" rel="noopener noreferrer">关于我们</a>
+              <a href="javascript:void(0)" target="_blank" rel="noopener noreferrer">服务条款</a>
+              <a href="javascript:void(0)" target="_blank" rel="noopener noreferrer">隐私政策</a>
+              <a href="javascript:void(0)" target="_blank" rel="noopener noreferrer">联系我们</a>
             </div>
           </div>
           {/* 新增的收起侧边栏按钮 */} 
