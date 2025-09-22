@@ -24,8 +24,25 @@ h1.app-title {
   gap: 10px;
 }
 
-.logo-icon {
-  font-size: 1.8em; /* 默认（手机）logo图标字体大小 */
+.app-header-logo {
+  height: 30px; /* 默认（手机）logo图标高度 */
+  width: auto;
+  object-fit: contain;
+}
+
+.hamburger-menu {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.5em; /* 默认（手机）汉堡包菜单字体大小 */
+  cursor: pointer;
+  display: block; /* 默认（手机）显示汉堡包菜单 */
+  padding: 5px;
+  transition: transform 0.3s ease;
+}
+
+.hamburger-menu:hover {
+  transform: scale(1.1);
 }
 
 .app-header .main-nav {
@@ -62,17 +79,7 @@ h1.app-title {
   transform: translateY(-2px);
 }
 
-/* 汉堡包菜单样式 */
-.hamburger-menu {
-  display: block; /* 默认（手机）显示汉堡包菜单 */
-  background: none;
-  border: none;
-  color: white;
-  font-size: 1.8em;
-  cursor: pointer;
-  padding: 5px;
-  z-index: 10;
-}
+/* 汉堡包菜单样式已移除 */
 
 /* 桌面端样式 */
 @media (min-width: 769px) {
@@ -84,8 +91,12 @@ h1.app-title {
     font-size: 1.8em; /* 桌面端标题字体 */
   }
 
-  .logo-icon {
-    font-size: 2.2em; /* 桌面端logo图标字体大小 */
+  .app-header-logo {
+    height: 40px; /* 桌面端logo图标高度 */
+  }
+
+  .hamburger-menu {
+    display: none; /* 桌面端隐藏汉堡包菜单 */
   }
 
   .app-header .main-nav {
@@ -96,12 +107,9 @@ h1.app-title {
     display: flex; /* 桌面端显示用户信息和退出按钮 */
   }
 
-  .hamburger-menu {
-    display: none; /* 桌面端隐藏汉堡包菜单 */
-  }
+  /* 汉堡包菜单已移除 */
 }
 
-/* 确保 hamburger-menu 在任何情况下都不显示 */
-.hamburger-menu {
-  display: none !important; 
-}
+/* 响应式调整已移除 */
+
+/* 确保 hamburger-menu 在任何情况下都不显示已移除 */

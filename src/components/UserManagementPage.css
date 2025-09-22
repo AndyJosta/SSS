@@ -220,36 +220,33 @@
   border: 1px solid #91d5ff;
 }
 
-.role-tag.editor {
-  background-color: #fff1b8;
-  color: #faad14;
-  border: 1px solid #ffe58f;
-}
-
 .role-tag.user {
   background-color: #f6ffed;
   color: #52c41a;
   border: 1px solid #b7eb8f;
 }
 
-.status-dot {
+/* 在线状态样式 */
+.online-status-cell {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+}
+
+.online-dot {
   display: inline-block;
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  margin-right: 8px;
 }
 
-.status-active {
-  background-color: #52c41a;
+.online-dot.online {
+  background-color: #52c41a; /* 绿色 */
 }
 
-.status-inactive {
-  background-color: #faad14;
-}
-
-.status-disabled {
-  background-color: #f5222d;
+.online-dot.offline {
+  background-color: #888; /* 灰色 */
 }
 
 .action-icons {
@@ -369,163 +366,6 @@
 .pagination-container .page-button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
-}
-
-/* 响应式调整 */
-@media (max-width: 768px) {
-  .user-management-page {
-    padding: 10px; /* 缩小页面整体padding */
-  }
-
-  .user-management-header {
-    padding: 20px;
-  }
-
-  .user-management-header h1 {
-    font-size: 1.8em;
-  }
-
-  .user-management-header p {
-    font-size: 0.9em;
-  }
-
-  .filter-bar {
-    flex-direction: column;
-    align-items: stretch;
-    padding: 15px 20px;
-  }
-
-  .filter-bar .search-input, .filter-bar .filter-select, .filter-bar .add-user-button {
-    width: 100%;
-    min-width: unset;
-  }
-
-  .user-table th, .user-table td {
-    padding: 10px;
-    font-size: 0.85em;
-  }
-
-  .user-info-cell .avatar {
-    width: 35px;
-    height: 35px;
-  }
-
-  .user-info-details .name {
-    font-size: 0.95em;
-  }
-
-  .user-info-details .contact {
-    font-size: 0.75em;
-  }
-
-  .role-tag {
-    padding: 4px 8px;
-    font-size: 0.75em;
-  }
-
-  .action-icons {
-    gap: 8px;
-  }
-
-  .action-icons span {
-    font-size: 1em;
-  }
-
-  .add-user-form-section {
-    padding: 20px;
-  }
-
-  .add-user-form-section h2 {
-    font-size: 1.8em;
-    margin-bottom: 20px;
-  }
-
-  .add-user-form-section label {
-    font-size: 0.9em;
-  }
-
-  .add-user-form-section input[type="text"],
-  .add-user-form-section input[type="password"],
-  .add-user-form-section select,
-  .add-user-form-section button[type="submit"] {
-    padding: 10px 15px;
-    font-size: 1em;
-  }
-
-  .pagination-container {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 8px;
-    margin-top: 20px;
-  }
-
-  .pagination-container .page-info {
-    width: 100%;
-    text-align: center;
-    margin-right: 0;
-    margin-bottom: 10px;
-  }
-
-  .pagination-container .page-button {
-    padding: 6px 10px;
-    font-size: 0.8em;
-  }
-
-  .modal-content {
-    padding: 20px;
-    max-width: 95%;
-  }
-
-  .modal-content h2 {
-    font-size: 1.8em;
-    margin-bottom: 15px;
-  }
-
-  .modal-avatar {
-    width: 80px;
-    height: 80px;
-    margin-bottom: 15px;
-  }
-
-  .user-detail-item {
-    font-size: 0.9em;
-    padding: 6px 0;
-  }
-
-  .user-detail-item strong {
-    min-width: 70px;
-  }
-
-  .modal-close-button {
-    padding: 10px 20px;
-    font-size: 1em;
-    margin-top: 20px;
-  }
-
-  .edit-modal .form-group {
-    margin-bottom: 15px;
-  }
-
-  .edit-modal input[type="text"],
-  .edit-modal select {
-    padding: 8px 12px;
-    font-size: 0.9em;
-  }
-
-  .edit-avatar-preview {
-    width: 50px;
-    height: 50px;
-  }
-
-  .modal-actions {
-    margin-top: 20px;
-    gap: 10px;
-  }
-
-  .modal-save-button, .modal-cancel-button {
-    padding: 8px 15px;
-    font-size: 0.9em;
-  }
 }
 
 /* 模态弹窗基础样式 */
@@ -695,4 +535,340 @@
 .modal-cancel-button:hover {
   background-color: #e6e6e6;
   transform: translateY(-1px);
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .user-management-page {
+    padding: 10px; /* 缩小页面整体padding */
+  }
+
+  .user-management-header {
+    padding: 20px;
+  }
+
+  .user-management-header h1 {
+    font-size: 1.8em;
+  }
+
+  .user-management-header p {
+    font-size: 0.9em;
+  }
+
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 15px 20px;
+  }
+
+  .filter-bar .search-input, .filter-bar .filter-select, .filter-bar .add-user-button {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .user-table th, .user-table td {
+    padding: 10px;
+    font-size: 0.85em;
+  }
+
+  .user-info-cell .avatar {
+    width: 35px;
+    height: 35px;
+  }
+
+  .user-info-details .name {
+    font-size: 0.95em;
+  }
+
+  .user-info-details .contact {
+    font-size: 0.75em;
+  }
+
+  .role-tag {
+    padding: 4px 8px;
+    font-size: 0.75em;
+  }
+
+  .action-icons {
+    gap: 8px;
+  }
+
+  .action-icons span {
+    font-size: 1em;
+  }
+
+  .add-user-form-section {
+    padding: 20px;
+  }
+
+  .add-user-form-section h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+
+  .add-user-form-section label {
+    font-size: 0.9em;
+  }
+
+  .add-user-form-section input[type="text"],
+  .add-user-form-section input[type="password"],
+  .add-user-form-section select,
+  .add-user-form-section button[type="submit"] {
+    padding: 10px 15px;
+    font-size: 1em;
+  }
+
+  .pagination-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .pagination-container .page-info {
+    width: 100%;
+    text-align: center;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .pagination-container .page-button {
+    padding: 6px 10px;
+    font-size: 0.8em;
+  }
+
+  .modal-content {
+    padding: 20px;
+    max-width: 95%;
+  }
+
+  .modal-content h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+  }
+
+  .modal-avatar {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+  }
+
+  .user-detail-item {
+    font-size: 0.9em;
+    padding: 6px 0;
+  }
+
+  .user-detail-item strong {
+    min-width: 70px;
+  }
+
+  .modal-close-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    margin-top: 20px;
+  }
+
+  .edit-modal .form-group {
+    margin-bottom: 15px;
+  }
+
+  .edit-modal input[type="text"],
+  .edit-modal select {
+    padding: 8px 12px;
+    font-size: 0.9em;
+  }
+
+  .edit-avatar-preview {
+    width: 50px;
+    height: 50px;
+  }
+
+  .modal-actions {
+    margin-top: 20px;
+    gap: 10px;
+  }
+
+  .modal-save-button, .modal-cancel-button {
+    padding: 8px 15px;
+    font-size: 0.9em;
+  }
+}
+
+/* 更小的手机屏幕调整 */
+@media (max-width: 480px) {
+  .user-management-page {
+    padding: 8px;
+  }
+
+  .user-management-header {
+    padding: 15px;
+    margin-bottom: 15px;
+  }
+
+  .user-management-header h1 {
+    font-size: 1.6em;
+  }
+
+  .user-management-header p {
+    font-size: 0.85em;
+  }
+
+  .filter-bar {
+    padding: 10px 15px;
+    gap: 10px;
+    margin-bottom: 15px;
+  }
+
+  .filter-bar .search-input, .filter-bar .filter-select, .filter-bar .add-user-button {
+    padding: 10px 12px;
+    font-size: 0.9em;
+    border-radius: 6px;
+  }
+
+  .add-user-button {
+    padding: 10px 18px;
+  }
+
+  .user-table-section {
+    padding: 15px 0;
+    margin-bottom: 15px;
+  }
+
+  .user-table {
+    min-width: 600px; /* 调整小屏幕下的最小宽度，以防止表格内容过度挤压 */
+  }
+
+  .user-table th, .user-table td {
+    padding: 8px;
+    font-size: 0.8em;
+  }
+
+  .user-info-cell {
+    gap: 10px;
+  }
+
+  .user-info-cell .avatar {
+    width: 30px;
+    height: 30px;
+  }
+
+  .user-info-details .name {
+    font-size: 0.9em;
+  }
+
+  .user-info-details .contact {
+    font-size: 0.7em;
+  }
+
+  .role-tag {
+    padding: 3px 6px;
+    font-size: 0.7em;
+  }
+
+  .action-icons {
+    gap: 5px;
+  }
+
+  .action-icons span {
+    font-size: 0.9em;
+  }
+
+  .add-user-form-section {
+    padding: 15px 20px;
+    margin-top: 15px;
+  }
+
+  .add-user-form-section h2 {
+    font-size: 1.6em;
+    margin-bottom: 15px;
+  }
+
+  .add-user-form-section .form-group {
+    margin-bottom: 15px;
+  }
+
+  .add-user-form-section label {
+    font-size: 0.85em;
+  }
+
+  .add-user-form-section input[type="text"],
+  .add-user-form-section input[type="password"],
+  .add-user-form-section select,
+  .add-user-form-section button[type="submit"] {
+    padding: 8px 12px;
+    font-size: 0.9em;
+    border-radius: 6px;
+  }
+
+  .pagination-container {
+    margin-top: 15px;
+    gap: 5px;
+  }
+
+  .pagination-container .page-info {
+    font-size: 0.8em;
+    margin-bottom: 8px;
+  }
+
+  .pagination-container .page-button {
+    padding: 5px 8px;
+    font-size: 0.75em;
+    border-radius: 5px;
+  }
+
+  .modal-content {
+    padding: 18px;
+    gap: 10px;
+  }
+
+  .modal-content h2 {
+    font-size: 1.6em;
+    margin-bottom: 12px;
+  }
+
+  .modal-avatar {
+    width: 70px;
+    height: 70px;
+    margin-bottom: 12px;
+  }
+
+  .user-detail-item {
+    font-size: 0.85em;
+    padding: 5px 0;
+  }
+
+  .user-detail-item strong {
+    min-width: 60px;
+  }
+
+  .modal-close-button {
+    padding: 8px 18px;
+    font-size: 0.9em;
+    margin-top: 15px;
+  }
+
+  .edit-modal .form-group {
+    margin-bottom: 12px;
+  }
+
+  .edit-modal input[type="text"],
+  .edit-modal select {
+    padding: 7px 10px;
+    font-size: 0.85em;
+  }
+
+  .edit-avatar-preview {
+    width: 40px;
+    height: 40px;
+  }
+
+  .modal-actions {
+    margin-top: 15px;
+    gap: 8px;
+  }
+
+  .modal-save-button, .modal-cancel-button {
+    padding: 7px 12px;
+    font-size: 0.85em;
+  }
 }

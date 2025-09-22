@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './UserManagementPage.css';
 
 const UserManagementPage = () => {
@@ -12,7 +12,7 @@ const UserManagementPage = () => {
       avatar: 'https://randomuser.me/api/portraits/men/1.jpg',
       role: 'admin',
       registrationDate: '2023-05-12 09:34',
-      status: 'active',
+      // isOnline: true, // 移除 isOnline 属性
     },
     {
       id: 2,
@@ -20,9 +20,9 @@ const UserManagementPage = () => {
       email: 'lisi@example.com',
       phone: '139****4321',
       avatar: 'https://randomuser.me/api/portraits/women/2.jpg',
-      role: 'editor',
+      role: 'user',
       registrationDate: '2023-06-25 14:22',
-      status: 'active',
+      // isOnline: false,
     },
     {
       id: 3,
@@ -32,7 +32,7 @@ const UserManagementPage = () => {
       avatar: 'https://randomuser.me/api/portraits/men/3.jpg',
       role: 'user',
       registrationDate: '2023-07-08 11:05',
-      status: 'inactive',
+      // isOnline: true,
     },
     {
       id: 4,
@@ -42,7 +42,7 @@ const UserManagementPage = () => {
       avatar: 'https://randomuser.me/api/portraits/women/4.jpg',
       role: 'user',
       registrationDate: '2023-08-15 16:47',
-      status: 'disabled',
+      // isOnline: false,
     },
     {
       id: 5,
@@ -50,9 +50,9 @@ const UserManagementPage = () => {
       email: 'sunqi@example.com',
       phone: '135****6789',
       avatar: 'https://randomuser.me/api/portraits/men/5.jpg',
-      role: 'editor',
+      role: 'user',
       registrationDate: '2023-09-02 10:18',
-      status: 'active',
+      // isOnline: true,
     },
     // 更多模拟用户数据以达到24条
     {
@@ -63,7 +63,7 @@ const UserManagementPage = () => {
       avatar: 'https://randomuser.me/api/portraits/men/6.jpg',
       role: 'user',
       registrationDate: '2023-09-10 11:00',
-      status: 'active',
+      // isOnline: true,
     },
     {
       id: 7,
@@ -73,7 +73,7 @@ const UserManagementPage = () => {
       avatar: 'https://randomuser.me/api/portraits/women/7.jpg',
       role: 'admin',
       registrationDate: '2023-09-15 13:30',
-      status: 'active',
+      // isOnline: false,
     },
     {
       id: 8,
@@ -83,7 +83,7 @@ const UserManagementPage = () => {
       avatar: 'https://randomuser.me/api/portraits/men/8.jpg',
       role: 'user',
       registrationDate: '2023-09-20 09:15',
-      status: 'inactive',
+      // isOnline: true,
     },
     {
       id: 9,
@@ -91,9 +91,9 @@ const UserManagementPage = () => {
       email: 'wangxiao@example.com',
       phone: '134****4444',
       avatar: 'https://randomuser.me/api/portraits/women/9.jpg',
-      role: 'editor',
+      role: 'user',
       registrationDate: '2023-09-25 16:00',
-      status: 'active',
+      // isOnline: true,
     },
     {
       id: 10,
@@ -103,9 +103,42 @@ const UserManagementPage = () => {
       avatar: 'https://randomuser.me/api/portraits/men/10.jpg',
       role: 'user',
       registrationDate: '2023-09-30 10:45',
-      status: 'disabled',
+      // isOnline: false,
     },
   ]);
+
+  // 移除模拟的 fetchUsers 函数
+  // const fetchUsers = () => {
+  //   const updatedUsers = users.map(user => ({
+  //     ...user,
+  //     isOnline: Math.random() > 0.5,
+  //   }));
+  //   setUsers(updatedUsers);
+  // };
+
+  // useEffect 用于设置定时轮询
+  useEffect(() => {
+    // fetchUsers(); // 首次加载时获取一次数据
+    // const interval = setInterval(fetchUsers, 30000); // 每 30 秒轮询一次
+
+    // TODO: 在这里集成真实的用户在线状态 API 或 WebSocket 连接
+    // 例如: 
+    // const socket = new WebSocket('ws://your-backend-url/ws/online-status');
+    // socket.onmessage = (event) => {
+    //   const onlineUsers = JSON.parse(event.data);
+    //   setUsers(prevUsers => prevUsers.map(user => ({
+    //     ...user,
+    //     isOnline: onlineUsers.includes(user.id), // 假设后端返回在线用户ID列表
+    //   })));
+    // };
+    // return () => socket.close();
+
+    // 对于目前的模拟数据，默认所有用户离线，直到真实数据接入
+    setUsers(prevUsers => prevUsers.map(user => ({ ...user, isOnline: false })));
+
+    // 清理函数：组件卸载时清除定时器 (如果使用了定时器)
+    // return () => clearInterval(interval);
+  }, []); // 空依赖数组表示只在组件挂载和卸载时运行
 
   // 分页状态
   const [currentPage, setCurrentPage] = useState(1);
@@ -169,6 +202,7 @@ const UserManagementPage = () => {
       role: newRole,
       registrationDate: new Date().toLocaleString(), // 自动生成注册时间
       status: 'active',
+      isOnline: false, // 新增用户默认离线
     };
     setUsers([...users, newUser]);
     setNewUsername('');
@@ -261,13 +295,10 @@ const UserManagementPage = () => {
           <option>所有角色</option>
           <option>管理员</option>
           <option>普通用户</option>
-          <option>编辑</option>
+          {/* 移除编辑角色选项 */} 
         </select>
         <select className="filter-select">
-          <option>所有状态</option>
-          <option>活跃</option>
-          <option>未活跃</option>
-          <option>已禁用</option>
+          {/* 移除状态筛选器 */} 
         </select>
         <button onClick={scrollToAddUserSection} className="add-user-button">+ 添加用户</button>
       </div>
@@ -280,7 +311,8 @@ const UserManagementPage = () => {
               <th>用户信息</th>
               <th>角色</th>
               <th>注册时间</th>
-              <th>状态</th>
+              {/* 移除状态列 */} 
+              <th>在线状态</th> {/* 新增在线状态列 */} 
               <th>操作</th>
             </tr>
           </thead>
@@ -299,13 +331,16 @@ const UserManagementPage = () => {
                 </td>
                 <td>
                   <span className={`role-tag ${user.role}`}>
-                    {user.role === 'admin' ? '管理员' : user.role === 'editor' ? '编辑' : '普通用户'}
+                    {user.role === 'admin' ? '管理员' : '普通用户'}
                   </span>
                 </td>
                 <td>{user.registrationDate}</td>
+                {/* 移除状态显示 */} 
                 <td>
-                  <span className={`status-dot status-${user.status}`}></span>
-                  {user.status === 'active' ? '活跃' : user.status === 'inactive' ? '未活跃' : '已禁用'}
+                  <div className="online-status-cell">
+                    <span className={`online-dot ${user.isOnline ? 'online' : 'offline'}`}></span>
+                    {user.isOnline ? '在线' : '离线'}
+                  </div>
                 </td>
                 <td>
                   <div className="action-icons">
@@ -370,7 +405,7 @@ const UserManagementPage = () => {
             <select id="new-role" value={newRole} onChange={(e) => setNewRole(e.target.value)}>
               <option value="user">普通用户</option>
               <option value="admin">管理员</option>
-            </select>
+            </select> {/* 移除编辑角色选项 */} 
           </div>
           <button type="submit">添加用户</button>
         </form>
@@ -395,21 +430,13 @@ const UserManagementPage = () => {
             </div>
             <div className="user-detail-item">
               <strong>角色:</strong> {
-                userToView.role === 'admin' ? '管理员' :
-                userToView.role === 'editor' ? '编辑' :
-                '普通用户'
+                userToView.role === 'admin' ? '管理员' : '普通用户'
               }
             </div>
             <div className="user-detail-item">
               <strong>注册时间:</strong> {userToView.registrationDate}
             </div>
-            <div className="user-detail-item">
-              <strong>状态:</strong> {
-                userToView.status === 'active' ? '活跃' :
-                userToView.status === 'inactive' ? '未活跃' :
-                '已禁用'
-              }
-            </div>
+            {/* 移除状态显示 */} 
             <button onClick={closeViewModal} className="modal-close-button">关闭</button>
           </div>
         </div>

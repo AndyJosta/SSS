@@ -232,7 +232,7 @@
   }
 
   /* 手机端隐藏 TeaPerson 容器 */
-  .tea-person-container {
-    display: none !important;
-  }
+  /* .tea-person-container { */
+  /*   display: none !important; */
+  /* } */
 }
