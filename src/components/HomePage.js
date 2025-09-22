@@ -1,15 +1,21 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import Header from './Header'; // 导入 Header 组件
 import TeaPerson from './TeaPerson'; // 导入 TeaPerson 组件
 import './HomePage.css';
 
 const HomePage = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // 新增状态来控制侧边栏的开合
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <div className="app-layout">
-      <Header />
+      <Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} /> {/* 传递 toggleSidebar 和 isSidebarOpen 给 Header */}
       <div className="homepage-container">
-        <aside className="sidebar">
+        <aside className={`sidebar ${isSidebarOpen ? 'sidebar-open' : ''}`}> {/* 动态添加类名 */}
           <nav>
             <ul>
               <li>
@@ -33,7 +39,7 @@ const HomePage = () => {
             </ul>
           </nav>
         </aside>
-        <main className="main-content">
+        <main className={`main-content ${isSidebarOpen ? 'sidebar-open-overlay' : ''}`}> {/* 动态添加遮罩类名 */}
           <Outlet /> {/* 用于渲染子路由内容 */}
         </main>
       </div>

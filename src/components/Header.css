@@ -18,6 +18,33 @@
   letter-spacing: 0.5px;
 }
 
+.logo-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.logo-icon {
+  font-size: 2.2em;
+}
+
+.app-header .main-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.header-right .username {
+  font-size: 1em;
+  color: #ecf0f1;
+}
+
 .main-nav .logout-button {
   background-color: #e74c3c; /* 红色退出按钮 */
   color: white;
@@ -33,4 +60,39 @@
 .main-nav .logout-button:hover {
   background-color: #c0392b;
   transform: translateY(-2px);
+}
+
+/* 汉堡包菜单样式 */
+.hamburger-menu {
+  display: none; /* 默认隐藏 */
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.8em;
+  cursor: pointer;
+  padding: 5px;
+  z-index: 10;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .app-header {
+    padding: 10px 15px; /* 缩小header填充 */
+  }
+
+  .app-header .app-title {
+    font-size: 1.5em; /* 缩小标题字体 */
+  }
+
+  .logo-icon {
+    font-size: 1.8em;
+  }
+
+  .header-right {
+    display: none; /* 在小屏幕上隐藏用户信息和退出按钮 */
+  }
+
+  .hamburger-menu {
+    display: block; /* 在小屏幕上显示汉堡包菜单 */
+  }
 }

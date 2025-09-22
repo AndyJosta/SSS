@@ -25,6 +25,7 @@
   align-items: flex-start;
   position: relative; /* 用于背景遮罩 */
   overflow: hidden; /* 隐藏超出部分的图片 */
+  transition: all 0.3s ease; /* 添加过渡效果 */
 }
 
 .sidebar::before {
@@ -84,4 +85,49 @@
   padding: 30px;
   background-color: #f4f7f6;
   overflow-y: auto;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .homepage-container {
+    flex-direction: column; /* 小屏幕上改为垂直布局 */
+  }
+
+  .sidebar {
+    position: fixed; /* 固定定位，覆盖在内容上方 */
+    left: 0;
+    top: 0;
+    width: 250px; /* 小屏幕上侧边栏宽度 */
+    height: 100vh;
+    transform: translateX(-100%); /* 默认隐藏 */
+    z-index: 999; /* 确保在其他内容之上 */
+    box-shadow: 3px 0 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .sidebar.sidebar-open {
+    transform: translateX(0); /* 显示侧边栏 */
+  }
+
+  .main-content {
+    width: 100%; /* 主内容区域占据全部宽度 */
+    padding: 20px; /* 缩小内容填充 */
+  }
+
+  /* 当侧边栏打开时，给主内容区添加一个半透明遮罩 */
+  .main-content.sidebar-open-overlay::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色遮罩 */
+    z-index: 998;
+    pointer-events: auto; /* 允许点击遮罩关闭侧边栏 */
+  }
+
+  .sidebar nav a {
+    padding: 10px 15px;
+    font-size: 0.95em;
+  }
 }
