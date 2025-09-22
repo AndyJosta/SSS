@@ -14,7 +14,7 @@
 .tea-person-image {
   /* width: 80px;  调整图片大小 */
   /* height: 80px; */
-  width: 80px;
+  width: 60px; /* 默认（手机）图片大小 */
   height: auto; /* 保持图片原始比例 */
   /* border-radius: 50%;  让图片呈圆形 */
   object-fit: contain; /* 确保图片完整显示并保持比例 */
@@ -40,23 +40,24 @@
 
 .chat-box {
   position: absolute;
-  bottom: 100px; /* 位于小人上方 */
-  left: 0;
-  width: 280px;
+  bottom: 80px; /* 默认（手机）位于小人上方 */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90vw; /* 默认（手机）占据视口宽度的90% */
+  max-width: 320px; /* 默认（手机）最大宽度限制 */
+  height: auto; /* 默认（手机）高度自适应 */
+  max-height: 70vh; /* 默认（手机）最大高度为视口高度的70% */
   background-color: #fff;
   border-radius: 15px;
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  max-height: 400px; /* 限制最大高度 */
   opacity: 0;
-  transform: translateY(20px);
   animation: fadeInPop 0.3s ease-out forwards;
-  resize: both; /* Allow manual resizing */
-  overflow: auto; /* Enable scrollbars if content overflows */
-  min-width: 200px; /* 调整最小宽度，更适应手机 */
-  min-height: 180px; /* 调整最小高度，更适应手机 */
+  resize: none; /* 默认（手机）禁用手动调整大小 */
+  min-width: 280px; /* 调整最小宽度 */
+  min-height: 250px; /* 调整最小高度 */
 }
 
 @keyframes fadeInPop {
@@ -73,8 +74,8 @@
 .chat-header {
   background-color: #4CAF50; /* 茶叶绿色 */
   color: white;
-  padding: 12px 15px;
-  font-size: 1.1em;
+  padding: 10px 12px; /* 默认（手机）padding */
+  font-size: 1em; /* 默认（手机）字体大小 */
   font-weight: bold;
   display: flex;
   justify-content: space-between;
@@ -84,7 +85,7 @@
 
 .chat-header-actions {
   display: flex;
-  gap: 8px; /* Space between buttons */
+  gap: 6px; /* Space between buttons */
   align-items: center;
 }
 
@@ -92,15 +93,15 @@
   background: none;
   border: 1px solid white; /* Square border */
   color: white;
-  font-size: 0.9em; /* Smaller font for square button */
+  font-size: 0.8em; /* Smaller font for square button */
   cursor: pointer;
   transition: background-color 0.2s ease, border-color 0.2s ease;
-  width: 24px; /* Make it a square */
-  height: 24px; /* Make it a square */
+  width: 22px; /* Make it a square */
+  height: 22px; /* Make it a square */
   display: flex; /* For centering text/icon */
   justify-content: center;
   align-items: center;
-  border-radius: 4px; /* Slightly rounded corners for the square */
+  border-radius: 3px; /* Slightly rounded corners for the square */
 }
 
 .maximize-chat-btn:hover {
@@ -112,7 +113,7 @@
   background: none;
   border: none;
   color: white;
-  font-size: 1.2em;
+  font-size: 1.1em;
   cursor: pointer;
   transition: color 0.2s ease;
 }
@@ -123,23 +124,23 @@
 
 .chat-messages {
   flex-grow: 1;
-  padding: 15px;
+  padding: 12px; /* 默认（手机）padding */
   overflow-y: auto;
   background-color: #f9f9f9;
   border-bottom: 1px solid #eee;
   color: #333;
-  font-size: 0.95em;
+  font-size: 0.9em; /* 默认（手机）字体大小 */
   line-height: 1.5;
 }
 
 .chat-messages p {
-  margin-bottom: 10px;
+  margin-bottom: 8px; /* 调整外边距 */
   white-space: pre-wrap; /* Preserve whitespace and allow wrapping */
 }
 
 .chat-input-area {
   display: flex;
-  padding: 10px 15px;
+  padding: 8px 12px; /* 默认（手机）padding */
   background-color: #f1f1f1;
   border-top: 1px solid #e0e0e0;
 }
@@ -147,10 +148,10 @@
 .chat-input-area input {
   flex-grow: 1;
   border: 1px solid #ddd;
-  border-radius: 20px;
-  padding: 8px 12px;
-  margin-right: 10px;
-  font-size: 0.9em;
+  border-radius: 18px; /* 调整圆角 */
+  padding: 6px 10px; /* 调整填充 */
+  margin-right: 8px;
+  font-size: 0.85em; /* 调整字体大小 */
   outline: none;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
@@ -164,10 +165,10 @@
   background-color: #4CAF50;
   color: white;
   border: none;
-  border-radius: 20px;
-  padding: 8px 15px;
+  border-radius: 18px; /* 调整圆角 */
+  padding: 6px 12px; /* 调整填充 */
   cursor: pointer;
-  font-size: 0.9em;
+  font-size: 0.85em; /* 调整字体大小 */
   transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
@@ -198,41 +199,172 @@
   z-index: 1001; /* Ensure it's above other elements */
 }
 
-/* 手机端聊天框样式调整 */
-@media (max-width: 768px) {
+/* 桌面端样式 */
+@media (min-width: 769px) {
+  .tea-person-container {
+    display: block; /* 桌面端显示 */
+  }
+
+  .tea-person-image {
+    width: 80px; /* 桌面端图片大小 */
+  }
+
   .chat-box {
-    width: 90vw; /* 占据视口宽度的90% */
-    max-width: 300px; /* 最大宽度限制 */
-    height: auto; /* 高度自适应 */
-    max-height: 70vh; /* 最大高度为视口高度的70% */
-    bottom: 80px; /* 调整距离底部的位置 */
-    left: 5vw; /* 居中显示 */
-    right: 5vw;
-    transform: translateX(0); /* 取消水平偏移 */
-  }
-
-  .chat-input-area input {
-    padding: 10px;
-    font-size: 1em;
-  }
-
-  .chat-input-area button {
-    padding: 10px 18px;
-    font-size: 1em;
+    bottom: 100px; /* 桌面端位于小人上方 */
+    left: 0;
+    transform: translateX(0);
+    width: 280px;
+    max-width: 280px;
+    max-height: 400px;
+    resize: both; /* 桌面端允许手动调整大小 */
+    min-width: 200px;
+    min-height: 180px;
   }
 
   .chat-header {
-    padding: 10px 12px;
-    font-size: 1em;
+    padding: 12px 15px;
+    font-size: 1.1em;
+  }
+
+  .chat-header-actions {
+    gap: 8px;
+  }
+
+  .maximize-chat-btn {
+    font-size: 0.9em;
+    width: 24px;
+    height: 24px;
+    border-radius: 4px;
+  }
+
+  .close-chat-btn {
+    font-size: 1.2em;
   }
 
   .chat-messages {
-    padding: 12px;
+    padding: 15px;
+    font-size: 0.95em;
+  }
+
+  .chat-messages p {
+    margin-bottom: 10px;
+  }
+
+  .chat-input-area {
+    padding: 10px 15px;
+  }
+
+  .chat-input-area input {
+    border-radius: 20px;
+    padding: 8px 12px;
+    margin-right: 10px;
     font-size: 0.9em;
   }
 
-  /* 手机端隐藏 TeaPerson 容器 */
-  /* .tea-person-container { */
-  /*   display: none !important; */
-  /* } */
+  .chat-input-area button {
+    border-radius: 20px;
+    padding: 8px 15px;
+    font-size: 0.9em;
+  }
+}
+
+/* 手机端隐藏 TeaPerson 容器并优化聊天框 */
+@media (max-width: 768px) {
+  .tea-person-container {
+    display: block; /* 在手机端显示 */
+    position: fixed; /* 固定定位 */
+    bottom: 15px; /* 调整到底部 */
+    right: 15px; /* 调整到右侧 */
+    left: auto; /* 移除左侧定位 */
+    top: auto; /* 移除顶部定位 */
+    z-index: 1000; /* 确保在顶层 */
+  }
+
+  .tea-person-image {
+    width: 50px; /* 调整手机端图片大小 */
+    height: 50px;
+  }
+
+  .chat-box {
+    width: 90vw; /* 占据视口宽度的90% */
+    max-width: 320px; /* 最大宽度限制 */
+    height: auto; /* 高度自适应 */
+    max-height: 70vh; /* 最大高度为视口高度的70% */
+    bottom: 80px; /* 位于小人上方 */
+    left: 50%; /* 水平居中 */
+    transform: translateX(-50%); /* 确保完全居中 */
+    resize: none; /* 禁用手动调整大小 */
+    min-width: 280px; /* 调整最小宽度 */
+    min-height: 250px; /* 调整最小高度 */
+  }
+
+  .chat-header {
+    padding: 10px 12px; /* 调整内边距 */
+    font-size: 1em; /* 调整字体大小 */
+  }
+
+  .chat-messages {
+    padding: 12px; /* 调整内边距 */
+    font-size: 0.9em; /* 调整字体大小 */
+  }
+
+  .chat-input-area {
+    padding: 8px 12px; /* 调整内边距 */
+  }
+
+  .chat-input-area input {
+    padding: 6px 10px; /* 调整填充 */
+    font-size: 0.85em; /* 调整字体大小 */
+  }
+
+  .chat-input-area button {
+    padding: 6px 12px; /* 调整填充 */
+    font-size: 0.85em; /* 调整字体大小 */
+  }
+}
+
+@media (max-width: 480px) {
+  .tea-person-container {
+    bottom: 10px;
+    right: 10px;
+  }
+
+  .tea-person-image {
+    width: 45px;
+    height: 45px;
+  }
+
+  .chat-box {
+    max-width: 95vw;
+    min-width: unset;
+    bottom: 60px;
+  }
+
+  .chat-header {
+    padding: 8px 10px;
+    font-size: 0.9em;
+  }
+
+  .chat-messages {
+    padding: 10px;
+    font-size: 0.8em;
+  }
+
+  .chat-messages p {
+    margin-bottom: 6px;
+  }
+
+  .chat-input-area {
+    padding: 6px 10px;
+  }
+
+  .chat-input-area input {
+    padding: 5px 8px;
+    font-size: 0.8em;
+  }
+
+  .chat-input-area button {
+    padding: 5px 10px;
+    font-size: 0.8em;
+  }
 }

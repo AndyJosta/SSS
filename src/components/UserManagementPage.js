@@ -303,8 +303,9 @@ const UserManagementPage = () => {
         <button onClick={scrollToAddUserSection} className="add-user-button">+ 添加用户</button>
       </div>
 
-      <div className="user-table-section">
-        <table className="user-table">
+      <div className="user-list-section">
+        {/* 桌面端表格 */} 
+        <table className="user-table desktop-table">
           <thead>
             <tr>
               <th><input type="checkbox" /></th>
@@ -354,6 +355,39 @@ const UserManagementPage = () => {
             ))}
           </tbody>
         </table>
+
+        {/* 手机端卡片列表 */} 
+        <div className="user-card-list mobile-list">
+          {currentUsers.map(user => (
+            <div key={user.id} className="user-card">
+              <div className="card-header">
+                <div className="user-info-cell">
+                  <img src={user.avatar} alt="Avatar" className="avatar" />
+                  <div className="user-info-details">
+                    <span className="name">{user.username}</span>
+                    <span className="contact">{user.email}</span>
+                  </div>
+                </div>
+                <div className="online-status-cell">
+                  <span className={`online-dot ${user.isOnline ? 'online' : 'offline'}`}></span>
+                  {user.isOnline ? '在线' : '离线'}
+                </div>
+              </div>
+              <div className="card-body">
+                <p><strong>手机:</strong> {user.phone}</p>
+                <p><strong>角色:</strong> <span className={`role-tag ${user.role}`}>
+                  {user.role === 'admin' ? '管理员' : '普通用户'}
+                </span></p>
+                <p><strong>注册时间:</strong> {user.registrationDate}</p>
+              </div>
+              <div className="card-actions">
+                <button onClick={() => handleViewUser(user.id)} className="action-button">查看</button>
+                <button onClick={() => handleEditUser(user.id)} className="action-button">编辑</button>
+                <button onClick={() => handleDeleteUser(user.id)} className="action-button delete-button" style={user.username === 'admin' ? { opacity: 0.5, cursor: 'not-allowed' } : {}}>删除</button>
+              </div>
+            </div>
+          ))}
+        </div>
 
         <div className="pagination-container">
           <span className="page-info">显示 {indexOfFirstUser + 1} 到 {Math.min(indexOfLastUser, users.length)} 条，共 {users.length} 条记录</span>

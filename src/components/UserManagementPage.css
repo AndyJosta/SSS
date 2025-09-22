@@ -115,7 +115,7 @@
   transform: translateY(-1px);
 }
 
-.user-table-section {
+.user-list-section {
   width: 100%;
   max-width: 1200px;
   background-color: #ffffff;
@@ -127,7 +127,7 @@
   overflow-x: auto; /* 允许表格水平滚动 */
 }
 
-.user-table {
+.desktop-table {
   width: 100%;
   min-width: 800px; /* 确保在小屏幕上表格不会过度挤压 */
   border-collapse: separate;
@@ -136,11 +136,11 @@
   box-sizing: border-box;
 }
 
-.user-table thead {
+.desktop-table thead {
   background-color: #fafafa;
 }
 
-.user-table th {
+.desktop-table th {
   padding: 15px 20px;
   text-align: left;
   font-weight: 600;
@@ -149,11 +149,11 @@
   border-bottom: 1px solid #f0f0f0;
 }
 
-.user-table th:first-child {
+.desktop-table th:first-child {
   padding-left: 30px; /* 调整复选框的左边距 */
 }
 
-.user-table td {
+.desktop-table td {
   padding: 15px 20px;
   text-align: left;
   border-bottom: 1px solid #f0f0f0;
@@ -163,15 +163,15 @@
   line-height: 1.5;
 }
 
-.user-table tbody tr {
+.desktop-table tbody tr {
   transition: background-color 0.2s ease;
 }
 
-.user-table tbody tr:hover {
+.desktop-table tbody tr:hover {
   background-color: #f5f5f5;
 }
 
-.user-table td:first-child {
+.desktop-table td:first-child {
   padding-left: 30px;
 }
 
@@ -566,6 +566,98 @@
     min-width: unset;
   }
 
+  .user-list-section .desktop-table {
+    display: none; /* 移动端隐藏桌面表格 */
+  }
+
+  .user-card-list.mobile-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* 适应手机屏幕的卡片布局 */
+    gap: 15px;
+    padding: 0 15px;
+  }
+
+  .user-card {
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .user-card .card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .user-card .user-info-cell .avatar {
+    width: 45px;
+    height: 45px;
+  }
+
+  .user-card .user-info-details .name {
+    font-size: 1.1em;
+  }
+
+  .user-card .user-info-details .contact {
+    font-size: 0.85em;
+  }
+
+  .user-card .card-body p {
+    margin: 5px 0;
+    font-size: 0.95em;
+    color: #555;
+  }
+
+  .user-card .card-body strong {
+    min-width: 60px;
+    display: inline-block;
+  }
+
+  .user-card .card-actions {
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    margin-top: 15px;
+  }
+
+  .user-card .action-button {
+    flex-grow: 1;
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #d9d9d9;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    font-size: 0.9em;
+    transition: all 0.2s ease;
+  }
+
+  .user-card .action-button:hover {
+    border-color: #1890ff;
+    color: #1890ff;
+  }
+
+  .user-card .delete-button {
+    color: #f5222d;
+    border-color: #f5222d;
+  }
+
+  .user-card .delete-button:hover {
+    background-color: #fff1f0;
+  }
+
+  .desktop-table {
+    display: none; /* 在移动设备上隐藏桌面表格 */
+  }
+
+  .user-list-section .mobile-list {
+    display: block; /* 在移动设备上显示卡片列表 */
+  }
+
   .user-table th, .user-table td {
     padding: 10px;
     font-size: 0.85em;
@@ -729,52 +821,50 @@
     padding: 10px 18px;
   }
 
-  .user-table-section {
+  .user-list-section {
     padding: 15px 0;
     margin-bottom: 15px;
   }
 
-  .user-table {
-    min-width: 600px; /* 调整小屏幕下的最小宽度，以防止表格内容过度挤压 */
+  .user-card-list.mobile-list {
+    gap: 10px;
+    padding: 0 10px;
   }
 
-  .user-table th, .user-table td {
-    padding: 8px;
-    font-size: 0.8em;
-  }
-
-  .user-info-cell {
+  .user-card {
+    padding: 15px;
     gap: 10px;
   }
 
-  .user-info-cell .avatar {
-    width: 30px;
-    height: 30px;
+  .user-card .user-info-cell .avatar {
+    width: 40px;
+    height: 40px;
   }
 
-  .user-info-details .name {
+  .user-card .user-info-details .name {
+    font-size: 1em;
+  }
+
+  .user-card .user-info-details .contact {
+    font-size: 0.8em;
+  }
+
+  .user-card .card-body p {
     font-size: 0.9em;
   }
 
-  .user-info-details .contact {
-    font-size: 0.7em;
+  .user-card .card-actions {
+    margin-top: 10px;
+    gap: 8px;
   }
 
-  .role-tag {
-    padding: 3px 6px;
-    font-size: 0.7em;
-  }
-
-  .action-icons {
-    gap: 5px;
-  }
-
-  .action-icons span {
-    font-size: 0.9em;
+  .user-card .action-button {
+    padding: 7px 10px;
+    font-size: 0.85em;
   }
 
   .add-user-form-section {
-    padding: 15px 20px;
+    padding: 15px;
     margin-top: 15px;
   }
 
@@ -784,7 +874,7 @@
   }
 
   .add-user-form-section .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 12px;
   }
 
   .add-user-form-section label {

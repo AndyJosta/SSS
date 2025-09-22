@@ -138,9 +138,11 @@ const HomePage = () => {
             </div>
           </div>
           {/* 新增的收起侧边栏按钮 */} 
-          <button className="collapse-sidebar-button" onClick={toggleSidebar}> 
-            <FontAwesomeIcon icon={faChevronLeft} /> 
-          </button> 
+          {isSidebarExpanded && (
+            <button className="collapse-sidebar-button" onClick={toggleSidebar}> 
+              <FontAwesomeIcon icon={faChevronLeft} /> 
+            </button>
+          )} 
         </aside>
         <main className={`main-content ${isSidebarExpanded ? 'expanded-content' : 'collapsed-content'}`}> 
           <Outlet />

@@ -1,6 +1,6 @@
 .blockchain-container {
-  padding: 30px;
-  max-width: 1000px;
+  padding: 15px; /* 默认（手机）padding */
+  max-width: 100%; /* 默认（手机）最大宽度 */
   margin: 0 auto;
   background-color: #ffffff;
   border-radius: 12px;
@@ -13,16 +13,16 @@
 .blockchain-container h1 {
   text-align: center;
   color: #2c3e50;
-  margin-bottom: 40px;
-  font-size: 2.8em;
+  margin-bottom: 25px; /* 调整外边距 */
+  font-size: 2em; /* 调整字体大小 */
   font-weight: 700;
   letter-spacing: 1px;
 }
 
 .intro-text {
-  font-size: 1.15em;
+  font-size: 1em; /* 调整字体大小 */
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 30px; /* 调整外边距 */
   color: #555;
   max-width: 800px;
   margin-left: auto;
@@ -30,8 +30,8 @@
 }
 
 .section {
-  margin-bottom: 60px;
-  padding: 25px;
+  margin-bottom: 35px; /* 调整外边距 */
+  padding: 18px; /* 调整内边距 */
   background-color: #f8fbfd;
   border-left: 5px solid #007bff;
   border-radius: 8px;
@@ -40,15 +40,15 @@
 
 .section h2 {
   color: #007bff;
-  font-size: 2em;
-  margin-bottom: 25px;
+  font-size: 1.6em; /* 调整字体大小 */
+  margin-bottom: 15px; /* 调整外边距 */
   border-bottom: 2px solid #e0e0e0;
-  padding-bottom: 15px;
+  padding-bottom: 10px; /* 调整内边距 */
 }
 
 .section p {
-  margin-bottom: 20px;
-  font-size: 1.05em;
+  margin-bottom: 15px; /* 调整外边距 */
+  font-size: 0.95em; /* 调整字体大小 */
 }
 
 .section ul {
@@ -57,10 +57,10 @@
 }
 
 .section li {
-  margin-bottom: 15px;
-  padding-left: 30px;
+  margin-bottom: 10px; /* 调整外边距 */
+  padding-left: 25px; /* 调整内边距 */
   position: relative;
-  font-size: 1.05em;
+  font-size: 0.95em; /* 调整字体大小 */
 }
 
 .section li::before {
@@ -78,7 +78,7 @@
   max-width: 100%;
   height: auto;
   border-radius: 10px;
-  margin-top: 30px;
+  margin-top: 20px; /* 调整外边距 */
   display: block;
   margin-left: auto;
   margin-right: auto;
@@ -87,10 +87,10 @@
 
 .footer-text {
   text-align: center;
-  margin-top: 60px;
-  font-size: 1.1em;
+  margin-top: 35px; /* 调整外边距 */
+  font-size: 1em; /* 调整字体大小 */
   color: #666;
-  padding-top: 20px;
+  padding-top: 15px; /* 调整内边距 */
   border-top: 1px dashed #e0e0e0;
 }
 
@@ -99,4 +99,101 @@
 .traceability-image,
 .tech-elements-image {
   border: 1px solid #ddd;
+}
+
+/* 响应式调整 */
+@media (max-width: 768px) {
+  .blockchain-container {
+    padding: 15px;
+    max-width: 95%;
+  }
+
+  .blockchain-container h1 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+
+  .intro-text {
+    font-size: 0.95em;
+    margin-bottom: 25px;
+  }
+
+  .section {
+    margin-bottom: 30px;
+    padding: 15px;
+  }
+
+  .section h2 {
+    font-size: 1.4em;
+    margin-bottom: 12px;
+    padding-bottom: 8px;
+  }
+
+  .section p,
+  .section li {
+    font-size: 0.9em;
+    margin-bottom: 12px;
+  }
+
+  .section li {
+    padding-left: 20px;
+  }
+
+  .section img {
+    margin-top: 15px;
+  }
+
+  .footer-text {
+    margin-top: 30px;
+    font-size: 0.95em;
+    padding-top: 12px;
+  }
+}
+
+@media (max-width: 480px) {
+  .blockchain-container {
+    padding: 10px;
+    border-radius: 8px;
+  }
+
+  .blockchain-container h1 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+  }
+
+  .intro-text {
+    font-size: 0.9em;
+    margin-bottom: 20px;
+  }
+
+  .section {
+    margin-bottom: 25px;
+    padding: 12px;
+  }
+
+  .section h2 {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+  }
+
+  .section p,
+  .section li {
+    font-size: 0.85em;
+    margin-bottom: 10px;
+  }
+
+  .section li {
+    padding-left: 18px;
+  }
+
+  .section img {
+    margin-top: 10px;
+  }
+
+  .footer-text {
+    margin-top: 25px;
+    font-size: 0.9em;
+    padding-top: 10px;
+  }
 }

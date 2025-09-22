@@ -511,7 +511,7 @@ const IotDashboardPage = () => {
   }, [currentPeriod, dashboardData, updateCharts]); // 添加 updateCharts 作为依赖项
 
   return (
-    <div className="font-sans text-light min-h-screen p-4 md:p-6 grid grid-cols-12 gap-4 md:gap-6">
+    <div className="font-sans text-light min-h-screen p-4 grid grid-cols-12 gap-4 md:p-6 md:gap-6">
       {/* 顶部导航栏 (已删除，因为HomePage已包含Header) */}
       {/* <header className="bg-primary/10 backdrop-blur-sm border-b border-primary/20 px-6 py-3 flex items-center justify-between">
         <div className="flex items-center space-x-3">
@@ -548,11 +548,11 @@ const IotDashboardPage = () => {
       {/* 主内容区 */}
       {/* <main className="p-4 md:p-6 grid grid-cols-12 gap-4 md:gap-6"> */}
         {/* 左侧区域 - 统计卡片 */}
-        <section className="col-span-12 md:col-span-3 space-y-4">
+        <section className="col-span-12 space-y-4 md:col-span-3">
           {/* 茶园数量 */}
           <div className="stat-card gradient-border bg-dark/40 p-4 rounded-lg">
             <div className="flex justify-between items-start mb-3">
-              <h3 className="text-light/80 font-medium">茶园数量</h3>
+              <h3 className="text-light/80 font-medium text-base">茶园数量</h3>
               <i className="fa fa-map-marker text-secondary"></i>
             </div>
             <div className="flex items-end">
@@ -565,7 +565,7 @@ const IotDashboardPage = () => {
           {/* 设备总数 */}
           <div className="stat-card gradient-border bg-dark/40 p-4 rounded-lg">
             <div className="flex justify-between items-start mb-3">
-              <h3 className="text-light/80 font-medium">设备总数</h3>
+              <h3 className="text-light/80 font-medium text-base">设备总数</h3>
               <i className="fa fa-microchip text-secondary"></i>
             </div>
             <div className="flex items-end">
@@ -578,7 +578,7 @@ const IotDashboardPage = () => {
           {/* 预警数量 */}
           <div className="stat-card gradient-border bg-dark/40 p-4 rounded-lg">
             <div className="flex justify-between items-start mb-3">
-              <h3 className="text-light/80 font-medium">预警数量</h3>
+              <h3 className="text-light/80 font-medium text-base">预警数量</h3>
               <i className="fa fa-exclamation-triangle text-accent"></i>
             </div>
             <div className="flex items-end">
@@ -591,7 +591,7 @@ const IotDashboardPage = () => {
           {/* 平均产量 */}
           <div className="stat-card gradient-border bg-dark/40 p-4 rounded-lg">
             <div className="flex justify-between items-start mb-3">
-              <h3 className="text-light/80 font-medium">平均产量</h3>
+              <h3 className="text-light/80 font-medium text-base">平均产量</h3>
               <i className="fa fa-bar-chart text-secondary"></i>
             </div>
             <div className="flex items-end">
@@ -603,19 +603,19 @@ const IotDashboardPage = () => {
 
           {/* 设备状态分布 */}
           <div className="gradient-border bg-dark/40 p-4 rounded-lg">
-            <h3 className="text-light/80 font-medium mb-4 text-base md:text-lg">设备状态分布</h3> {/* 调整标题字体大小 */}
-            <div className="chart-container h-40 md:h-48"> {/* 调整小屏幕高度 */}
+            <h3 className="text-base font-medium mb-4 md:text-lg">设备状态分布</h3> {/* 调整标题字体大小 */}
+            <div className="chart-container h-48"> {/* 调整小屏幕高度 */}
               <canvas id="device-status-chart" ref={deviceStatusChartRef}></canvas>
             </div>
           </div>
         </section>
 
         {/* 中间区域 - 主图表和地图 */}
-        <section className="col-span-12 md:col-span-6 space-y-4">
+        <section className="col-span-12 space-y-4 md:col-span-6">
           {/* 环境参数实时监控 */}
           <div className="gradient-border bg-dark/40 p-4 rounded-lg">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg md:text-xl font-bold">环境参数实时监控</h2> {/* 调整标题字体大小 */}
+              <h2 className="text-lg font-bold md:text-xl">环境参数实时监控</h2> {/* 调整标题字体大小 */}
               <div className="flex space-x-2">
                 <button
                   className={`px-3 py-1 text-xs rounded transition-colors ${currentPeriod === 'day' ? 'bg-primary/40 text-light' : 'bg-primary/20 hover:bg-primary/40'}`}
@@ -634,7 +634,7 @@ const IotDashboardPage = () => {
                 >本月</button>
               </div>
             </div>
-            <div className="chart-container h-64 md:h-80">
+            <div className="chart-container h-64">
               <canvas id="environment-chart" ref={environmentChartRef}></canvas>
             </div>
           </div>
@@ -642,12 +642,12 @@ const IotDashboardPage = () => {
           {/* 茶园分布地图 */}
           <div className="gradient-border bg-dark/40 p-4 rounded-lg">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">茶园分布地图</h2>
+              <h2 className="text-lg font-bold md:text-xl">茶园分布地图</h2>
               <button className="text-secondary hover:text-light transition-colors">
                 <i className="fa fa-expand"></i>
               </button>
             </div>
-            <div className="relative h-56 md:h-80 bg-[#1A2A1C] rounded-lg overflow-hidden"> {/* 调整小屏幕高度 */}
+            <div className="relative h-64 bg-[#1A2A1C] rounded-lg overflow-hidden"> {/* 调整小屏幕高度 */}
               {/* 简化的地图背景 */}
               <div className="absolute inset-0 opacity-30 bg-[url('https://picsum.photos/id/10/800/600')] bg-cover bg-center"></div>
 
@@ -701,26 +701,26 @@ const IotDashboardPage = () => {
 
           {/* 茶叶生长周期监控 */}
           <div className="gradient-border bg-dark/40 p-4 rounded-lg">
-            <h2 className="text-lg md:text-xl font-bold mb-4">茶叶生长周期监控</h2> {/* 调整标题字体大小 */}
-            <div className="chart-container h-40 md:h-48"> {/* 调整小屏幕高度 */}
+            <h2 className="text-lg font-bold mb-4 md:text-xl">茶叶生长周期监控</h2> {/* 调整标题字体大小 */}
+            <div className="chart-container h-48"> {/* 调整小屏幕高度 */}
               <canvas id="growth-cycle-chart" ref={growthCycleChartRef}></canvas>
             </div>
           </div>
         </section>
 
         {/* 右侧区域 - 设备列表和预警信息 */}
-        <section className="col-span-12 md:col-span-3 space-y-4">
+        <section className="col-span-12 space-y-4 md:col-span-3">
           {/* 实时预警信息 */}
           <div className="gradient-border bg-dark/40 p-4 rounded-lg">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg md:text-xl font-bold">实时预警</h2> {/* 调整标题字体大小 */}
+              <h2 className="text-lg font-bold md:text-xl">实时预警</h2> {/* 调整标题字体大小 */}
               <span className="px-2 py-1 text-xs bg-warning/20 text-warning rounded-full animate-pulse-slow">{dashboardData.alerts.filter(alert => !alert.handled).length} 条未处理</span>
             </div>
-            <div className="space-y-3 max-h-48 md:max-h-64 overflow-y-auto pr-1"> {/* 调整小屏幕最大高度 */}
+            <div className="space-y-3 max-h-56 overflow-y-auto pr-1 md:max-h-64"> {/* 调整小屏幕最大高度 */}
               {dashboardData.alerts.map(alert => (
                 <div key={alert.id} className="bg-warning/10 border border-warning/20 p-3 rounded-lg">
                   <div className="flex justify-between items-start">
-                    <h4 className="font-medium text-accent">{alert.type}</h4>
+                    <h4 className="font-medium text-accent text-base">{alert.type}</h4>
                     <span className="text-xs text-light/60">{alert.time}</span>
                   </div>
                   <p className="text-sm text-light/80 mt-1">{alert.description}</p>
@@ -735,18 +735,18 @@ const IotDashboardPage = () => {
           {/* 设备列表 */}
           <div className="gradient-border bg-dark/40 p-4 rounded-lg">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg md:text-xl font-bold">设备状态</h2> {/* 调整标题字体大小 */}
+              <h2 className="text-lg font-bold md:text-xl">设备状态</h2> {/* 调整标题字体大小 */}
               <button className="text-secondary hover:text-light transition-colors">
                 <i className="fa fa-refresh"></i>
               </button>
             </div>
-            <div className="space-y-3 max-h-72 md:max-h-[400px] overflow-y-auto pr-1"> {/* 调整小屏幕最大高度 */}
+            <div className="space-y-3 max-h-80 overflow-y-auto pr-1 md:max-h-[400px]"> {/* 调整小屏幕最大高度 */}
               {dashboardData.devices.map(device => (
                 <div key={device.id} className="bg-dark/60 p-3 rounded-lg hover:bg-dark/80 transition-colors">
                   <div className="flex justify-between items-center">
                     <div className="flex items-center">
                       <div className={`status-indicator status-${device.status}`}></div>
-                      <span className="font-medium">{device.name}</span>
+                      <span className="font-medium text-base">{device.name}</span>
                     </div>
                     <span className={`text-xs px-2 py-0.5 rounded ${device.status === 'online' ? 'bg-secondary/20 text-secondary' : device.status === 'warning' ? 'bg-accent/20 text-accent' : 'bg-warning/20 text-warning'}`}>
                       {device.status === 'online' ? '正常' : device.status === 'warning' ? '预警' : '离线'}
