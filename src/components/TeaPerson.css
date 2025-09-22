@@ -55,8 +55,8 @@
   animation: fadeInPop 0.3s ease-out forwards;
   resize: both; /* Allow manual resizing */
   overflow: auto; /* Enable scrollbars if content overflows */
-  min-width: 250px; /* Minimum width */
-  min-height: 200px; /* Minimum height */
+  min-width: 200px; /* 调整最小宽度，更适应手机 */
+  min-height: 180px; /* 调整最小高度，更适应手机 */
 }
 
 @keyframes fadeInPop {
@@ -196,4 +196,38 @@
   box-shadow: none !important; /* No shadow */
   position: fixed !important; /* Fixed position relative to viewport */
   z-index: 1001; /* Ensure it's above other elements */
+}
+
+/* 手机端聊天框样式调整 */
+@media (max-width: 768px) {
+  .chat-box {
+    width: 90vw; /* 占据视口宽度的90% */
+    max-width: 300px; /* 最大宽度限制 */
+    height: auto; /* 高度自适应 */
+    max-height: 70vh; /* 最大高度为视口高度的70% */
+    bottom: 80px; /* 调整距离底部的位置 */
+    left: 5vw; /* 居中显示 */
+    right: 5vw;
+    transform: translateX(0); /* 取消水平偏移 */
+  }
+
+  .chat-input-area input {
+    padding: 10px;
+    font-size: 1em;
+  }
+
+  .chat-input-area button {
+    padding: 10px 18px;
+    font-size: 1em;
+  }
+
+  .chat-header {
+    padding: 10px 12px;
+    font-size: 1em;
+  }
+
+  .chat-messages {
+    padding: 12px;
+    font-size: 0.9em;
+  }
 }

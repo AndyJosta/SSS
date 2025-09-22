@@ -12,18 +12,24 @@
 }
 
 .sidebar {
-  width: 250px;
+  /* 默认（手机）样式 */
+  position: fixed; /* 固定定位，覆盖在内容上方 */
+  left: 0;
+  top: 0;
+  width: 250px; /* 小屏幕上侧边栏宽度 */
+  height: 100vh; /* 小屏幕上侧边栏高度 */
+  transform: translateX(-100%); /* 默认隐藏 */
+  z-index: 999; /* 确保在其他内容之上 */
   background-image: url('../img/bj1.png'); /* 设置背景图片 */
   background-size: cover; /* 覆盖整个区域 */
   background-position: center; /* 图片居中 */
   background-repeat: no-repeat; /* 不重复 */
   color: white;
   padding: 30px 20px;
-  box-shadow: 3px 0 8px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 0 15px rgba(0, 0, 0, 0.3); /* 调整box-shadow以适应固定定位 */
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  position: relative; /* 用于背景遮罩 */
   overflow: hidden; /* 隐藏超出部分的图片 */
   transition: all 0.3s ease; /* 添加过渡效果 */
 }
@@ -55,14 +61,15 @@
 }
 
 .sidebar nav a {
+  /* 默认（手机）样式 */
   color: #ecf0f1;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* 增加文字阴影 */
   text-decoration: none;
-  padding: 12px 20px;
+  padding: 10px 15px; /* 导航链接填充 */
   display: block;
   border-radius: 6px;
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-  font-size: 1.05em;
+  font-size: 0.95em; /* 导航链接字体大小 */
   font-weight: 500;
   display: flex;
   align-items: center;
@@ -82,52 +89,49 @@
 
 .main-content {
   flex-grow: 1;
-  padding: 30px;
+  padding: 20px; /* 默认（手机）缩小内容填充 */
   background-color: #f4f7f6;
   overflow-y: auto;
 }
 
-/* 响应式调整 */
-@media (max-width: 768px) {
+/* 当侧边栏打开时，给主内容区添加一个半透明遮罩 (默认手机样式) */
+.main-content.sidebar-open-overlay::before {
+  content: '';
+  position: fixed; /* 固定定位 */
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色遮罩 */
+  z-index: 998; /* 确保在侧边栏下方 */
+  pointer-events: auto; /* 允许点击遮罩关闭侧边栏 */
+}
+
+/* 桌面端样式 */
+@media (min-width: 769px) {
   .homepage-container {
-    flex-direction: column; /* 小屏幕上改为垂直布局 */
+    flex-direction: row; /* 桌面端改为水平布局 */
   }
 
   .sidebar {
-    position: fixed; /* 固定定位，覆盖在内容上方 */
-    left: 0;
-    top: 0;
-    width: 250px; /* 小屏幕上侧边栏宽度 */
-    height: 100vh;
-    transform: translateX(-100%); /* 默认隐藏 */
-    z-index: 999; /* 确保在其他内容之上 */
-    box-shadow: 3px 0 15px rgba(0, 0, 0, 0.3);
-  }
-
-  .sidebar.sidebar-open {
-    transform: translateX(0); /* 显示侧边栏 */
+    position: relative; /* 桌面端相对定位 */
+    width: 250px; /* 桌面端侧边栏宽度 */
+    height: 100vh; /* 桌面端侧边栏高度 */
+    transform: translateX(0); /* 桌面端始终显示 */
+    box-shadow: 3px 0 8px rgba(0, 0, 0, 0.2); /* 恢复桌面端box-shadow */
   }
 
   .main-content {
-    width: 100%; /* 主内容区域占据全部宽度 */
-    padding: 20px; /* 缩小内容填充 */
+    padding: 30px; /* 桌面端内容填充 */
   }
 
-  /* 当侧边栏打开时，给主内容区添加一个半透明遮罩 */
+  /* 桌面端不显示遮罩 */
   .main-content.sidebar-open-overlay::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色遮罩 */
-    z-index: 998;
-    pointer-events: auto; /* 允许点击遮罩关闭侧边栏 */
+    display: none;
   }
 
   .sidebar nav a {
-    padding: 10px 15px;
-    font-size: 0.95em;
+    padding: 12px 20px; /* 桌面端导航链接填充 */
+    font-size: 1.05em; /* 桌面端导航链接字体大小 */
   }
 }
