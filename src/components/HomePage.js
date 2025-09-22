@@ -52,7 +52,7 @@ const HomePage = () => {
             </ul>
           </nav>
         </aside>
-        <main className={`main-content ${isSidebarOpen ? 'sidebar-open-overlay' : ''}`}> {/* 动态添加遮罩类名 */}
+        <main className="main-content"> {/* 移除动态遮罩类名 */}
           <Outlet /> {/* 用于渲染子路由内容 */}
         </main>
       </div>
