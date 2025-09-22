@@ -4,7 +4,7 @@
   align-items: center;
   background-color: #f0f2f5; /* 页面背景色 */
   min-height: 100vh;
-  padding: 20px;
+  padding: 20px; /* 默认padding */
   box-sizing: border-box;
 }
 
@@ -14,7 +14,7 @@
   background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  padding: 30px 40px;
+  padding: 25px 40px; /* 默认padding */
   margin-bottom: 20px;
   box-sizing: border-box;
   text-align: left;
@@ -54,7 +54,7 @@
   background-color: #ffffff;
   border-radius: 12px;
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  padding: 25px 40px;
+  padding: 25px 40px; /* 默认padding */
   margin-bottom: 20px;
   align-items: center;
   flex-wrap: wrap;
@@ -67,7 +67,7 @@
   border: 1px solid #d9d9d9;
   border-radius: 8px;
   font-size: 1em;
-  min-width: 250px;
+  min-width: 250px; /* 默认最小宽度 */
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -84,7 +84,7 @@
   font-size: 1em;
   background-color: #fff;
   cursor: pointer;
-  min-width: 150px;
+  min-width: 150px; /* 默认最小宽度 */
   transition: border-color 0.3s ease;
 }
 
@@ -124,10 +124,12 @@
   padding: 20px 0;
   margin-bottom: 20px;
   box-sizing: border-box;
+  overflow-x: auto; /* 允许表格水平滚动 */
 }
 
 .user-table {
   width: 100%;
+  min-width: 800px; /* 确保在小屏幕上表格不会过度挤压 */
   border-collapse: separate;
   border-spacing: 0 8px; /* 行间距 */
   padding: 0 20px;
@@ -371,9 +373,26 @@
 
 /* 响应式调整 */
 @media (max-width: 768px) {
+  .user-management-page {
+    padding: 10px; /* 缩小页面整体padding */
+  }
+
+  .user-management-header {
+    padding: 20px;
+  }
+
+  .user-management-header h1 {
+    font-size: 1.8em;
+  }
+
+  .user-management-header p {
+    font-size: 0.9em;
+  }
+
   .filter-bar {
     flex-direction: column;
     align-items: stretch;
+    padding: 15px 20px;
   }
 
   .filter-bar .search-input, .filter-bar .filter-select, .filter-bar .add-user-button {
@@ -383,6 +402,129 @@
 
   .user-table th, .user-table td {
     padding: 10px;
+    font-size: 0.85em;
+  }
+
+  .user-info-cell .avatar {
+    width: 35px;
+    height: 35px;
+  }
+
+  .user-info-details .name {
+    font-size: 0.95em;
+  }
+
+  .user-info-details .contact {
+    font-size: 0.75em;
+  }
+
+  .role-tag {
+    padding: 4px 8px;
+    font-size: 0.75em;
+  }
+
+  .action-icons {
+    gap: 8px;
+  }
+
+  .action-icons span {
+    font-size: 1em;
+  }
+
+  .add-user-form-section {
+    padding: 20px;
+  }
+
+  .add-user-form-section h2 {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+  }
+
+  .add-user-form-section label {
+    font-size: 0.9em;
+  }
+
+  .add-user-form-section input[type="text"],
+  .add-user-form-section input[type="password"],
+  .add-user-form-section select,
+  .add-user-form-section button[type="submit"] {
+    padding: 10px 15px;
+    font-size: 1em;
+  }
+
+  .pagination-container {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .pagination-container .page-info {
+    width: 100%;
+    text-align: center;
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .pagination-container .page-button {
+    padding: 6px 10px;
+    font-size: 0.8em;
+  }
+
+  .modal-content {
+    padding: 20px;
+    max-width: 95%;
+  }
+
+  .modal-content h2 {
+    font-size: 1.8em;
+    margin-bottom: 15px;
+  }
+
+  .modal-avatar {
+    width: 80px;
+    height: 80px;
+    margin-bottom: 15px;
+  }
+
+  .user-detail-item {
+    font-size: 0.9em;
+    padding: 6px 0;
+  }
+
+  .user-detail-item strong {
+    min-width: 70px;
+  }
+
+  .modal-close-button {
+    padding: 10px 20px;
+    font-size: 1em;
+    margin-top: 20px;
+  }
+
+  .edit-modal .form-group {
+    margin-bottom: 15px;
+  }
+
+  .edit-modal input[type="text"],
+  .edit-modal select {
+    padding: 8px 12px;
+    font-size: 0.9em;
+  }
+
+  .edit-avatar-preview {
+    width: 50px;
+    height: 50px;
+  }
+
+  .modal-actions {
+    margin-top: 20px;
+    gap: 10px;
+  }
+
+  .modal-save-button, .modal-cancel-button {
+    padding: 8px 15px;
+    font-size: 0.9em;
   }
 }
 

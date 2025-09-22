@@ -603,8 +603,8 @@ const IotDashboardPage = () => {
 
           {/* 设备状态分布 */}
           <div className="gradient-border bg-dark/40 p-4 rounded-lg">
-            <h3 className="text-light/80 font-medium mb-4">设备状态分布</h3>
-            <div className="chart-container h-48">
+            <h3 className="text-light/80 font-medium mb-4 text-base md:text-lg">设备状态分布</h3> {/* 调整标题字体大小 */}
+            <div className="chart-container h-40 md:h-48"> {/* 调整小屏幕高度 */}
               <canvas id="device-status-chart" ref={deviceStatusChartRef}></canvas>
             </div>
           </div>
@@ -615,7 +615,7 @@ const IotDashboardPage = () => {
           {/* 环境参数实时监控 */}
           <div className="gradient-border bg-dark/40 p-4 rounded-lg">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">环境参数实时监控</h2>
+              <h2 className="text-lg md:text-xl font-bold">环境参数实时监控</h2> {/* 调整标题字体大小 */}
               <div className="flex space-x-2">
                 <button
                   className={`px-3 py-1 text-xs rounded transition-colors ${currentPeriod === 'day' ? 'bg-primary/40 text-light' : 'bg-primary/20 hover:bg-primary/40'}`}
@@ -647,7 +647,7 @@ const IotDashboardPage = () => {
                 <i className="fa fa-expand"></i>
               </button>
             </div>
-            <div className="relative h-64 md:h-80 bg-[#1A2A1C] rounded-lg overflow-hidden">
+            <div className="relative h-56 md:h-80 bg-[#1A2A1C] rounded-lg overflow-hidden"> {/* 调整小屏幕高度 */}
               {/* 简化的地图背景 */}
               <div className="absolute inset-0 opacity-30 bg-[url('https://picsum.photos/id/10/800/600')] bg-cover bg-center"></div>
 
@@ -701,8 +701,8 @@ const IotDashboardPage = () => {
 
           {/* 茶叶生长周期监控 */}
           <div className="gradient-border bg-dark/40 p-4 rounded-lg">
-            <h2 className="text-xl font-bold mb-4">茶叶生长周期监控</h2>
-            <div className="chart-container h-48">
+            <h2 className="text-lg md:text-xl font-bold mb-4">茶叶生长周期监控</h2> {/* 调整标题字体大小 */}
+            <div className="chart-container h-40 md:h-48"> {/* 调整小屏幕高度 */}
               <canvas id="growth-cycle-chart" ref={growthCycleChartRef}></canvas>
             </div>
           </div>
@@ -713,10 +713,10 @@ const IotDashboardPage = () => {
           {/* 实时预警信息 */}
           <div className="gradient-border bg-dark/40 p-4 rounded-lg">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">实时预警</h2>
+              <h2 className="text-lg md:text-xl font-bold">实时预警</h2> {/* 调整标题字体大小 */}
               <span className="px-2 py-1 text-xs bg-warning/20 text-warning rounded-full animate-pulse-slow">{dashboardData.alerts.filter(alert => !alert.handled).length} 条未处理</span>
             </div>
-            <div className="space-y-3 max-h-64 overflow-y-auto pr-1">
+            <div className="space-y-3 max-h-48 md:max-h-64 overflow-y-auto pr-1"> {/* 调整小屏幕最大高度 */}
               {dashboardData.alerts.map(alert => (
                 <div key={alert.id} className="bg-warning/10 border border-warning/20 p-3 rounded-lg">
                   <div className="flex justify-between items-start">
@@ -735,12 +735,12 @@ const IotDashboardPage = () => {
           {/* 设备列表 */}
           <div className="gradient-border bg-dark/40 p-4 rounded-lg">
             <div className="flex justify-between items-center mb-4">
-              <h2 className="text-xl font-bold">设备状态</h2>
+              <h2 className="text-lg md:text-xl font-bold">设备状态</h2> {/* 调整标题字体大小 */}
               <button className="text-secondary hover:text-light transition-colors">
                 <i className="fa fa-refresh"></i>
               </button>
             </div>
-            <div className="space-y-3 max-h-[400px] overflow-y-auto pr-1">
+            <div className="space-y-3 max-h-72 md:max-h-[400px] overflow-y-auto pr-1"> {/* 调整小屏幕最大高度 */}
               {dashboardData.devices.map(device => (
                 <div key={device.id} className="bg-dark/60 p-3 rounded-lg hover:bg-dark/80 transition-colors">
                   <div className="flex justify-between items-center">
