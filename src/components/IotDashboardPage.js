@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import './IotDashboardPage.css';
 
 const IotDashboardPage = () => {
-  const [currentTime, setCurrentTime] = useState('');
+  // const [currentTime, setCurrentTime] = useState(''); // 移除未使用的 currentTime 状态
   const [currentPeriod, setCurrentPeriod] = useState('week'); // Default to '本周'
   const [dashboardData, setDashboardData] = useState({
     teaGardenCount: 12,
@@ -38,23 +38,24 @@ const IotDashboardPage = () => {
   const environmentChartRef = useRef(null);
   const growthCycleChartRef = useRef(null);
 
-  let deviceStatusChartInstance = null;
-  let environmentChartInstance = null;
-  let growthCycleChartInstance = null;
+  // 将图表实例存储在 useRef 中，而不是 let 变量
+  const deviceStatusChartInstanceRef = useRef(null);
+  const environmentChartInstanceRef = useRef(null);
+  const growthCycleChartInstanceRef = useRef(null);
 
-  const updateCharts = (period) => {
+  const updateCharts = useCallback((period) => { // 使用 useCallback 包裹 updateCharts
     if (typeof window.Chart === 'undefined') return;
 
     const envData = dashboardData.environmentData[period];
 
     // Destroy existing chart instances before re-initializing
-    if (deviceStatusChartInstance) deviceStatusChartInstance.destroy();
-    if (environmentChartInstance) environmentChartInstance.destroy();
-    if (growthCycleChartInstance) growthCycleChartInstance.destroy();
+    if (deviceStatusChartInstanceRef.current) deviceStatusChartInstanceRef.current.destroy();
+    if (environmentChartInstanceRef.current) environmentChartInstanceRef.current.destroy();
+    if (growthCycleChartInstanceRef.current) growthCycleChartInstanceRef.current.destroy();
 
     // 设备状态分布图表
     const deviceStatusCtx = deviceStatusChartRef.current.getContext('2d');
-    deviceStatusChartInstance = new window.Chart(deviceStatusCtx, {
+    deviceStatusChartInstanceRef.current = new window.Chart(deviceStatusCtx, { // 更新 useRef
       type: 'doughnut',
       data: {
         labels: ['在线', '离线', '预警'],
@@ -101,7 +102,7 @@ const IotDashboardPage = () => {
 
     // 环境参数监控图表
     const environmentCtx = environmentChartRef.current.getContext('2d');
-    environmentChartInstance = new window.Chart(environmentCtx, {
+    environmentChartInstanceRef.current = new window.Chart(environmentCtx, { // 更新 useRef
       type: 'line',
       data: {
         labels: envData.labels,
@@ -223,7 +224,7 @@ const IotDashboardPage = () => {
 
     // 茶叶生长周期图表
     const growthCycleCtx = growthCycleChartRef.current.getContext('2d');
-    growthCycleChartInstance = new window.Chart(growthCycleCtx, {
+    growthCycleChartInstanceRef.current = new window.Chart(growthCycleCtx, { // 更新 useRef
       type: 'bar',
       data: {
         labels: dashboardData.growthCycleData.labels,
@@ -291,36 +292,38 @@ const IotDashboardPage = () => {
         }
       }
     });
-  };
+  }, [dashboardData]); // updateCharts 的依赖项
 
-  const updateEnvironmentChartData = (period) => {
-    const envData = dashboardData.environmentData[period];
-    if (environmentChartInstance) {
-      environmentChartInstance.data.labels = envData.labels;
-      environmentChartInstance.data.datasets[0].data = envData.temperature;
-      environmentChartInstance.data.datasets[1].data = envData.humidity;
-      environmentChartInstance.data.datasets[2].data = envData.light;
-      environmentChartInstance.update();
-    }
-  };
+  // 移除未使用的 updateEnvironmentChartData 函数
+  // const updateEnvironmentChartData = (period) => {
+  //   const envData = dashboardData.environmentData[period];
+  //   if (environmentChartInstance) {
+  //     environmentChartInstance.data.labels = envData.labels;
+  //     environmentChartInstance.data.datasets[0].data = envData.temperature;
+  //     environmentChartInstance.data.datasets[1].data = envData.humidity;
+  //     environmentChartInstance.data.datasets[2].data = envData.light;
+  //     environmentChartInstance.update();
+  //   }
+  // };
 
   useEffect(() => {
-    // Update current time
-    function updateTime() {
-      const now = new Date();
-      const options = {
-        year: 'numeric',
-        month: '2-digit',
-        day: '2-digit',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false
-      };
-      setCurrentTime(now.toLocaleString('zh-CN', options));
-    }
-    updateTime();
-    const timeInterval = setInterval(updateTime, 1000);
+    // 移除更新当前时间逻辑
+    // function updateTime() {
+    //   const now = new Date();
+    //   const options = {
+    //     year: 'numeric',
+    //     month: '2-digit',
+    //     day: '2-digit',
+    //     hour: '2-digit',
+    //     minute: '2-digit',
+    //     second: '2-digit',
+    //     hour12: false
+    //   };
+    //   setCurrentTime(now.toLocaleString('zh-CN', options));
+    // }
+    // updateTime();
+    // const timeInterval = setInterval(updateTime, 1000);
+
 
     // Initialize and update charts
     updateCharts(currentPeriod);
@@ -370,12 +373,10 @@ const IotDashboardPage = () => {
             newStatus = statusOptions[(statusOptions.indexOf(oldStatus) + 1) % statusOptions.length];
           }
 
+          newDeviceStatus[oldStatus]--; // Decrement old status count
+          newDeviceStatus[newStatus]++; // Increment new status count
           deviceToUpdate.status = newStatus;
           newDevices[randomIndex] = deviceToUpdate;
-
-          // Update deviceStatus counts
-          newDeviceStatus[oldStatus]--;
-          newDeviceStatus[newStatus]++;
           
           // Update specific device details based on new status
           if (newStatus === 'offline') {
@@ -458,8 +459,8 @@ const IotDashboardPage = () => {
       });
 
       // Force Chart.js update after state change
-      if (environmentChartInstance) {
-        environmentChartInstance.update();
+      if (environmentChartInstanceRef.current) { // 使用 useRef 更新
+        environmentChartInstanceRef.current.update();
       }
 
     }, 30000); // Update every 30 seconds
@@ -498,16 +499,16 @@ const IotDashboardPage = () => {
     });
 
     return () => {
-      clearInterval(timeInterval);
+      // clearInterval(timeInterval); // 移除时间间隔清理
       clearInterval(chartDataInterval);
       periodButtons.forEach(button => {
         button.removeEventListener('click', handlePeriodClick);
       });
-      if (deviceStatusChartInstance) deviceStatusChartInstance.destroy();
-      if (environmentChartInstance) environmentChartInstance.destroy();
-      if (growthCycleChartInstance) growthCycleChartInstance.destroy();
+      if (deviceStatusChartInstanceRef.current) deviceStatusChartInstanceRef.current.destroy(); // 更新 useRef
+      if (environmentChartInstanceRef.current) environmentChartInstanceRef.current.destroy(); // 更新 useRef
+      if (growthCycleChartInstanceRef.current) growthCycleChartInstanceRef.current.destroy(); // 更新 useRef
     };
-  }, [currentPeriod, dashboardData]); // Rerun effect when currentPeriod or dashboardData changes
+  }, [currentPeriod, dashboardData, updateCharts]); // 添加 updateCharts 作为依赖项
 
   return (
     <div className="font-sans text-light min-h-screen p-4 md:p-6 grid grid-cols-12 gap-4 md:gap-6">
