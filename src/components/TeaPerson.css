@@ -1,0 +1,199 @@
+.tea-person-container {
+  position: absolute; /* Changed from fixed to absolute */
+  /* bottom: 20px; Removed, position controlled by JS */
+  /* left: 20px; Removed, position controlled by JS */
+  z-index: 1000;
+  cursor: grab; /* Indicates draggable */
+  transition: none; /* Remove transition for smooth dragging */
+}
+
+.tea-person-container.dragging {
+  cursor: grabbing; /* Cursor when dragging */
+}
+
+.tea-person-image {
+  /* width: 80px;  调整图片大小 */
+  /* height: 80px; */
+  width: 80px;
+  height: auto; /* 保持图片原始比例 */
+  /* border-radius: 50%;  让图片呈圆形 */
+  object-fit: contain; /* 确保图片完整显示并保持比例 */
+  /* box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); */
+  transition: transform 0.3s ease-in-out;
+}
+
+.tea-person-image:hover {
+  transform: scale(1.05);
+}
+
+.tea-person-container.wiggle .tea-person-image {
+  animation: wiggle 0.5s ease-in-out;
+}
+
+@keyframes wiggle {
+  0% { transform: rotate(0deg); }
+  25% { transform: rotate(-5deg); }
+  50% { transform: rotate(0deg); }
+  75% { transform: rotate(5deg); }
+  100% { transform: rotate(0deg); }
+}
+
+.chat-box {
+  position: absolute;
+  bottom: 100px; /* 位于小人上方 */
+  left: 0;
+  width: 280px;
+  background-color: #fff;
+  border-radius: 15px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: 400px; /* 限制最大高度 */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInPop 0.3s ease-out forwards;
+  resize: both; /* Allow manual resizing */
+  overflow: auto; /* Enable scrollbars if content overflows */
+  min-width: 250px; /* Minimum width */
+  min-height: 200px; /* Minimum height */
+}
+
+@keyframes fadeInPop {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.chat-header {
+  background-color: #4CAF50; /* 茶叶绿色 */
+  color: white;
+  padding: 12px 15px;
+  font-size: 1.1em;
+  font-weight: bold;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #45a049;
+}
+
+.chat-header-actions {
+  display: flex;
+  gap: 8px; /* Space between buttons */
+  align-items: center;
+}
+
+.maximize-chat-btn {
+  background: none;
+  border: 1px solid white; /* Square border */
+  color: white;
+  font-size: 0.9em; /* Smaller font for square button */
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+  width: 24px; /* Make it a square */
+  height: 24px; /* Make it a square */
+  display: flex; /* For centering text/icon */
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px; /* Slightly rounded corners for the square */
+}
+
+.maximize-chat-btn:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-color: #ffdddd;
+}
+
+.close-chat-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2em;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.close-chat-btn:hover {
+  color: #ffdddd;
+}
+
+.chat-messages {
+  flex-grow: 1;
+  padding: 15px;
+  overflow-y: auto;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #eee;
+  color: #333;
+  font-size: 0.95em;
+  line-height: 1.5;
+}
+
+.chat-messages p {
+  margin-bottom: 10px;
+  white-space: pre-wrap; /* Preserve whitespace and allow wrapping */
+}
+
+.chat-input-area {
+  display: flex;
+  padding: 10px 15px;
+  background-color: #f1f1f1;
+  border-top: 1px solid #e0e0e0;
+}
+
+.chat-input-area input {
+  flex-grow: 1;
+  border: 1px solid #ddd;
+  border-radius: 20px;
+  padding: 8px 12px;
+  margin-right: 10px;
+  font-size: 0.9em;
+  outline: none;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.chat-input-area input:focus {
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.2);
+}
+
+.chat-input-area button {
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 15px;
+  cursor: pointer;
+  font-size: 0.9em;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.chat-input-area button:hover {
+  background-color: #45a049;
+  transform: translateY(-1px);
+}
+
+.chat-input-area button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Styles for maximized state */
+.chat-box.maximized {
+  width: 100vw !important; /* Take full viewport width */
+  height: 100vh !important; /* Take full viewport height */
+  max-height: 100vh !important; /* Override max-height */
+  top: 0 !important; /* Position at top-left of viewport */
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  transform: none !important; /* Remove any transform */
+  border-radius: 0 !important; /* No border-radius for full screen */
+  box-shadow: none !important; /* No shadow */
+  position: fixed !important; /* Fixed position relative to viewport */
+  z-index: 1001; /* Ensure it's above other elements */
+}

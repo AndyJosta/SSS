@@ -1,0 +1,87 @@
+.app-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+.homepage-container {
+  display: flex;
+  flex-grow: 1; /* 占据剩余空间 */
+  font-family: 'Roboto', sans-serif;
+  background-color: #f4f7f6;
+}
+
+.sidebar {
+  width: 250px;
+  background-image: url('../img/bj1.png'); /* 设置背景图片 */
+  background-size: cover; /* 覆盖整个区域 */
+  background-position: center; /* 图片居中 */
+  background-repeat: no-repeat; /* 不重复 */
+  color: white;
+  padding: 30px 20px;
+  box-shadow: 3px 0 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  position: relative; /* 用于背景遮罩 */
+  overflow: hidden; /* 隐藏超出部分的图片 */
+}
+
+.sidebar::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* 半透明遮罩，使文字更清晰 */
+  z-index: 1;
+}
+
+.sidebar > * {
+  position: relative;
+  z-index: 2;
+}
+
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  width: 100%;
+}
+
+.sidebar nav li {
+  margin-bottom: 15px;
+}
+
+.sidebar nav a {
+  color: #ecf0f1;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* 增加文字阴影 */
+  text-decoration: none;
+  padding: 12px 20px;
+  display: block;
+  border-radius: 6px;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+  font-size: 1.05em;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+}
+
+.sidebar nav a:hover {
+  background-color: rgba(52, 73, 94, 0.7); /* 调整悬停背景透明度 */
+  color: #ffffff;
+  transform: translateX(5px);
+}
+
+.sidebar nav a.active {
+  background-color: rgba(0, 123, 255, 0.8); /* 调整选中背景透明度 */
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 123, 255, 0.3);
+}
+
+.main-content {
+  flex-grow: 1;
+  padding: 30px;
+  background-color: #f4f7f6;
+  overflow-y: auto;
+}

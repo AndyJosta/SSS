@@ -1,0 +1,125 @@
+.login-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-image: url('https://images.unsplash.com/photo-1542475510-b96277c0b0ee?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'); /* 更换背景图片 */
+  background-size: cover;
+  background-position: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  position: relative; /* 用于背景遮罩 */
+}
+
+.login-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.4); /* 背景遮罩 */
+  z-index: 1;
+}
+
+.login-container > * {
+  position: relative;
+  z-index: 2;
+}
+
+.login-container h2 {
+  margin-bottom: 30px;
+  color: white; /* 调整标题颜色以适应背景 */
+  font-size: 2.8em; /* 调整字体大小 */
+  font-weight: 700;
+  text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.6);
+}
+
+.login-container form {
+  background-color: rgba(255, 255, 255, 0.95); /* 半透明背景 */
+  padding: 50px;
+  border-radius: 12px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  width: 100%;
+  max-width: 450px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(224, 224, 224, 0.5);
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 10px;
+  color: #333;
+  font-size: 16px; /* 调整字体大小 */
+  font-weight: 500;
+}
+
+.form-group input[type="text"],
+.form-group input[type="password"] {
+  width: 100%;
+  padding: 14px 18px; /* 调整填充 */
+  border: 1px solid #a0a0a0;
+  border-radius: 8px;
+  font-size: 17px; /* 调整字体大小 */
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-group input[type="text"]:focus,
+.form-group input[type="password"]:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.3);
+  outline: none;
+}
+
+.login-container button[type="submit"] {
+  background-image: linear-gradient(45deg, #007bff 0%, #0056b3 100%);
+  color: white;
+  padding: 15px 25px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 19px; /* 调整字体大小 */
+  font-weight: 600;
+  margin-top: 30px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 123, 255, 0.2);
+}
+
+.login-container button[type="submit"]:hover {
+  background-image: linear-gradient(45deg, #0056b3 0%, #003f7f 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 123, 255, 0.3);
+}
+
+.toggle-button {
+  background: none;
+  border: none;
+  color: #a0c4ff; /* 调整颜色以适应背景 */
+  cursor: pointer;
+  margin-top: 25px;
+  font-size: 16px; /* 调整字体大小 */
+  transition: color 0.3s ease;
+}
+
+.toggle-button:hover {
+  text-decoration: underline;
+  color: #cfe2f3; /* 调整颜色 */
+}
+
+.error-message {
+  color: #ff4d4f; /* 调整错误信息颜色 */
+  font-size: 15px;
+  margin-bottom: 20px;
+  text-align: center;
+  background-color: rgba(255, 235, 238, 0.9); /* 错误信息背景 */
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #ffa39e;
+}
