@@ -1,21 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import Header from './Header'; // 导入 Header 组件
 import TeaPerson from './TeaPerson'; // 导入 TeaPerson 组件
 import './HomePage.css';
 
 const HomePage = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false); // 新增状态来控制侧边栏的开合
+  // 移除 isSidebarOpen 状态和 toggleSidebar 函数，因为侧边栏将始终可见
+  // const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  // const toggleSidebar = () => {
+  //   setIsSidebarOpen(!isSidebarOpen);
+  // };
 
-  const toggleSidebar = () => {
-    setIsSidebarOpen(!isSidebarOpen);
-  };
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 768); // 新增状态来判断是否为移动端
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <div className="app-layout">
-      <Header toggleSidebar={toggleSidebar} isSidebarOpen={isSidebarOpen} /> {/* 传递 toggleSidebar 和 isSidebarOpen 给 Header */}
+      <Header /> {/* 移除 toggleSidebar 和 isSidebarOpen prop */}
       <div className="homepage-container">
-        <aside className={`sidebar ${isSidebarOpen ? 'sidebar-open' : ''}`}> {/* 动态添加类名 */}
+        <aside className="sidebar"> {/* 移除动态类名 */}
           <nav>
             <ul>
               <li>
@@ -43,7 +56,7 @@ const HomePage = () => {
           <Outlet /> {/* 用于渲染子路由内容 */}
         </main>
       </div>
-      <TeaPerson /> {/* 将 TeaPerson 组件放置在 HomePage 内部，固定在左下角 */} 
+      {!isMobile && <TeaPerson />} {/* 根据 isMobile 状态条件渲染 TeaPerson 组件 */}
     </div>
   );
 };

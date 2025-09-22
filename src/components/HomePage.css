@@ -13,24 +13,25 @@
 
 .sidebar {
   /* 默认（手机）样式 */
-  position: fixed; /* 固定定位，覆盖在内容上方 */
+  position: fixed; /* 保持固定定位，以便与主内容区域并排 */
   left: 0;
   top: 0;
-  width: 250px; /* 小屏幕上侧边栏宽度 */
+  width: 80px; /* 手机端侧边栏宽度缩小 */
   height: 100vh; /* 小屏幕上侧边栏高度 */
-  transform: translateX(-100%); /* 默认隐藏 */
+  transform: translateX(0); /* 始终显示 */
   z-index: 999; /* 确保在其他内容之上 */
   background-image: url('../img/bj1.png'); /* 设置背景图片 */
   background-size: cover; /* 覆盖整个区域 */
   background-position: center; /* 图片居中 */
   background-repeat: no-repeat; /* 不重复 */
   color: white;
-  padding: 30px 20px;
+  padding: 10px 5px; /* 调整填充 */
   box-shadow: 3px 0 15px rgba(0, 0, 0, 0.3); /* 调整box-shadow以适应固定定位 */
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  overflow: hidden; /* 隐藏超出部分的图片 */
+  align-items: center; /* 导航项居中 */
+  overflow-x: hidden; /* 隐藏超出部分的导航文字 */
+  overflow-y: auto; /* 允许侧边栏内容垂直滚动 */
   transition: all 0.3s ease; /* 添加过渡效果 */
 }
 
@@ -51,9 +52,8 @@
 }
 
 .sidebar nav ul {
-  list-style: none;
-  padding: 0;
   width: 100%;
+  text-align: center; /* 导航项文字居中 */
 }
 
 .sidebar nav li {
@@ -65,14 +65,16 @@
   color: #ecf0f1;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* 增加文字阴影 */
   text-decoration: none;
-  padding: 10px 15px; /* 导航链接填充 */
+  padding: 10px 5px; /* 导航链接填充，更紧凑 */
   display: block;
   border-radius: 6px;
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
-  font-size: 0.95em; /* 导航链接字体大小 */
+  font-size: 0.75em; /* 导航链接字体大小缩小 */
   font-weight: 500;
   display: flex;
-  align-items: center;
+  flex-direction: column; /* 文本和图标垂直排列 */
+  align-items: center; /* 文本和图标居中 */
+  gap: 5px; /* 文本和图标之间的间距 */
 }
 
 .sidebar nav a:hover {
@@ -89,23 +91,16 @@
 
 .main-content {
   flex-grow: 1;
-  padding: 20px; /* 默认（手机）缩小内容填充 */
+  padding: 10px; /* 默认（手机）缩小内容填充 */
   background-color: #f4f7f6;
   overflow-y: auto;
+  margin-left: 80px; /* 与侧边栏宽度一致，避免内容被遮挡 */
 }
 
-/* 当侧边栏打开时，给主内容区添加一个半透明遮罩 (默认手机样式) */
-.main-content.sidebar-open-overlay::before {
-  content: '';
-  position: fixed; /* 固定定位 */
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5); /* 半透明黑色遮罩 */
-  z-index: 998; /* 确保在侧边栏下方 */
-  pointer-events: auto; /* 允许点击遮罩关闭侧边栏 */
-}
+/* 移除侧边栏打开时的遮罩层样式 */
+/* .main-content.sidebar-open-overlay::before { */
+/*   display: none; */
+/* } */
 
 /* 桌面端样式 */
 @media (min-width: 769px) {
@@ -119,19 +114,29 @@
     height: 100vh; /* 桌面端侧边栏高度 */
     transform: translateX(0); /* 桌面端始终显示 */
     box-shadow: 3px 0 8px rgba(0, 0, 0, 0.2); /* 恢复桌面端box-shadow */
+    padding: 30px 20px; /* 恢复桌面端填充 */
+    overflow-x: hidden; /* 恢复隐藏 */
+    align-items: flex-start; /* 恢复对齐 */
   }
 
-  .main-content {
-    padding: 30px; /* 桌面端内容填充 */
-  }
-
-  /* 桌面端不显示遮罩 */
-  .main-content.sidebar-open-overlay::before {
-    display: none;
+  .sidebar nav ul {
+    text-align: left; /* 导航项文字左对齐 */
   }
 
   .sidebar nav a {
     padding: 12px 20px; /* 桌面端导航链接填充 */
     font-size: 1.05em; /* 桌面端导航链接字体大小 */
+    flex-direction: row; /* 文本和图标水平排列 */
+    gap: normal; /* 恢复默认间距 */
   }
+
+  .main-content {
+    padding: 30px; /* 桌面端内容填充 */
+    margin-left: 0; /* 桌面端取消 margin-left */
+  }
+
+  /* 桌面端不显示遮罩 */
+  /* .main-content.sidebar-open-overlay::before {
+    display: none;
+  } */
 }

@@ -100,3 +100,8 @@ h1.app-title {
     display: none; /* 桌面端隐藏汉堡包菜单 */
   }
 }
+
+/* 确保 hamburger-menu 在任何情况下都不显示 */
+.hamburger-menu {
+  display: none !important; 
+}
