@@ -8,16 +8,16 @@
   display: flex; 
   flex-grow: 1; 
   font-family: 'Roboto', sans-serif;
-  background-color: #f4f7f6;
+  background-color: rgba(0, 0, 0, 0.5); /* 调整为黑色透明度50% */
   overflow-x: hidden; 
 }
 
 .sidebar {
   position: fixed; 
   left: 0;
-  top: 0;
+  top: 60px; /* 位于顶部栏下方 (根据新的顶部栏高度调整) */
   width: 250px; /* 默认展开宽度 */
-  height: 100vh; 
+  height: calc(100vh - 60px); /* 占据剩余垂直空间 (根据新的顶部栏高度调整) */
   z-index: 999; 
   background-color: #0d1117; /* GitHub 深色背景 */
   color: #c9d1d9; /* GitHub 默认文本颜色 */
@@ -130,6 +130,12 @@
   margin-right: 10px; /* Logo 和标题之间的间距 */
 }
 
+.sidebar-logo-fallback-icon {
+  font-size: 1.8em; /* 默认（手机）备用图标字体大小 */
+  color: #c9d1d9;
+  margin-right: 10px;
+}
+
 .close-sidebar-btn {
   background: none;
   border: none;
@@ -187,13 +193,13 @@
   font-weight: 600;
 }
 
-.sidebar nav a i {
+.sidebar nav a svg {
   width: 20px; 
   text-align: center;
   color: #8b949e; 
 }
 
-.sidebar nav a.active i {
+.sidebar nav a.active svg {
   color: #ffffff; 
 }
 
@@ -229,7 +235,7 @@
   box-shadow: 0 0 0 3px rgba(31, 111, 235, 0.3);
 }
 
-.sidebar-repo-search .fas.fa-search {
+.sidebar-repo-search svg {
   color: #8b949e;
   margin-right: 8px;
 }
@@ -274,7 +280,7 @@
   color: #ffffff;
 }
 
-.sidebar-repo-list a i {
+.sidebar-repo-list a svg {
   color: #3b82f6; 
 }
 
@@ -307,10 +313,48 @@
   text-decoration: underline;
 }
 
+.collapse-sidebar-button {
+  position: absolute;
+  top: 50%; /* 垂直居中 */
+  right: 0px; /* 紧贴右侧边缘 */
+  transform: translateY(-50%); /* 精确垂直居中 */
+  background-color: #0d1117; /* 与侧边栏背景相同 */
+  border: 1px solid #30363d;
+  border-radius: 50% 0 0 50%; /* 半圆形，仅左侧有圆角 */
+  color: #8b949e;
+  width: 40px; /* 增大宽度 */
+  height: 40px; /* 增大高度 */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease, transform 0.2s ease, border-radius 0.2s ease;
+  font-size: 18px; /* 增大字体大小 */
+  z-index: 1000; /* 确保在最上层 */
+}
+
+.collapse-sidebar-button:hover {
+  background-color: #30363d;
+  color: #c9d1d9;
+  transform: translateY(-50%) translateX(-5px); /* 悬停时稍微左移 */
+}
+
+/* 在侧边栏折叠时隐藏收起按钮 */
+.sidebar.collapsed .collapse-sidebar-button {
+  display: none;
+}
+
+/* 手机端隐藏收起按钮，因为汉堡菜单在顶部 */
+@media (max-width: 768px) {
+  .collapse-sidebar-button {
+    display: none; 
+  }
+}
+
 .main-content {
   flex-grow: 1;
   padding: 30px;
-  background-color: #f4f7f6; 
+  background-color: rgba(0, 0, 0, 0.5); /* 调整为黑色透明度50% */
   overflow-y: auto;
   margin-left: 250px; /* 侧边栏的固定宽度 */
   transition: margin-left 0.3s ease; 

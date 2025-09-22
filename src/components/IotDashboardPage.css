@@ -19,7 +19,7 @@
 
 /* 基础样式 */
 body {
-  background-color: #0F1C10;
+  background-color: transparent;
   background-image: 
     radial-gradient(circle at 10% 20%, rgba(46, 125, 50, 0.1) 0%, transparent 20%),
     radial-gradient(circle at 90% 80%, rgba(129, 199, 132, 0.1) 0%, transparent 20%);
@@ -53,11 +53,14 @@ body {
 
 /* 数据卡片动画 */
 .stat-card {
+  background-color: #21262d; /* 匹配深色背景 */
+  border: 1px solid #30363d; /* GitHub 风格边框 */
+  border-radius: 6px;
   transition: all 0.3s ease;
 }
 .stat-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 30px rgba(46, 125, 50, 0.2);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.4); /* 更深的阴影 */
 }
 
 /* 设备状态指示器 */

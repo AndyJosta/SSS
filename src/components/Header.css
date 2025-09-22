@@ -2,10 +2,10 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #2c3e50; /* 深色背景 */
-  color: white;
-  padding: 10px 15px; /* 默认（手机）header填充 */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  background-color: #0d1117; /* GitHub 深色背景 */
+  color: #c9d1d9; /* GitHub 默认文本颜色 */
+  padding: 8px 15px; /* 默认（手机）header填充，缩小一点 */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* 更强的阴影 */
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
 }
@@ -13,9 +13,10 @@
 /* 默认（手机）标题选择器 */
 h1.app-title {
   margin: 0;
-  font-size: 1.5em; /* 默认（手机）缩小标题字体 */
-  font-weight: 600;
-  letter-spacing: 0.5px;
+  font-size: 1.7em; /* 调整字体大小 */
+  font-weight: 700; /* 更粗的字体 */
+  letter-spacing: 0.8px; /* 增加字母间距 */
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* 增加文字阴影 */
 }
 
 .logo-group {
@@ -30,10 +31,15 @@ h1.app-title {
   object-fit: contain;
 }
 
+.app-header-logo-fallback-icon {
+  font-size: 1.8em; /* 默认（手机）备用图标字体大小 */
+  color: #c9d1d9; /* 与顶部栏文本颜色一致 */
+}
+
 .hamburger-menu {
   background: none;
   border: none;
-  color: white;
+  color: #c9d1d9; /* 与顶部栏文本颜色一致 */
   font-size: 1.5em; /* 默认（手机）汉堡包菜单字体大小 */
   cursor: pointer;
   display: block; /* 默认（手机）显示汉堡包菜单 */
@@ -45,32 +51,95 @@ h1.app-title {
   transform: scale(1.1);
 }
 
+.header-search-container {
+  display: flex;
+  align-items: center;
+  background-color: #161b22; /* 搜索框背景色 */
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 8px 12px;
+  flex-grow: 1; /* 占据可用空间 */
+  max-width: 400px; /* 最大宽度 */
+  margin: 0 20px; /* 左右间距 */
+}
+
+.header-search-container .search-icon {
+  color: #8b949e;
+  margin-right: 8px;
+  font-size: 1.1em;
+}
+
+.header-search-input {
+  background: none;
+  border: none;
+  color: #c9d1d9;
+  flex-grow: 1;
+  outline: none;
+  font-size: 1em;
+  width: 100%;
+}
+
+.header-search-input::placeholder {
+  color: #8b949e;
+}
+
 .app-header .main-nav {
   display: flex;
   align-items: center;
-  /* 默认（手机）不设置gap，让内容更紧凑 */
+  gap: 20px; /* 调整间距 */
+}
+
+.notification-icon-container {
+  position: relative;
+  margin-right: 20px; /* 右侧间距 */
+  cursor: pointer;
+}
+
+.notification-icon {
+  color: #8b949e;
+  font-size: 1.5em;
+  transition: color 0.2s ease;
+}
+
+.notification-icon:hover {
+  color: #c9d1d9;
+}
+
+.notification-badge {
+  position: absolute;
+  top: -8px;
+  right: -8px;
+  background-color: #e74c3c; /* 红色徽章 */
+  color: white;
+  border-radius: 50%;
+  padding: 2px 6px;
+  font-size: 0.75em;
+  font-weight: 600;
+  min-width: 15px; /* 确保数字居中 */
+  text-align: center;
 }
 
 .header-right {
-  display: none; /* 默认（手机）隐藏用户信息和退出按钮 */
+  display: flex; /* 默认（手机）隐藏用户信息和退出按钮 */
   align-items: center;
   gap: 15px;
 }
 
 .header-right .username {
-  font-size: 1em;
-  color: #ecf0f1;
+  font-size: 1.05em; /* 稍微增大字体 */
+  font-weight: 500; /* 调整字体粗细 */
+  color: #e0e0e0; /* 稍微亮一点的颜色 */
 }
 
 .main-nav .logout-button {
   background-color: #e74c3c; /* 红色退出按钮 */
-  color: white;
+  color: #ffffff;
   border: none;
   padding: 10px 20px;
   border-radius: 6px;
   cursor: pointer;
-  font-size: 1em;
-  font-weight: 500;
+  font-size: 1.05em; /* 稍微增大字体 */
+  font-weight: 600; /* 调整字体粗细 */
   transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
@@ -84,23 +153,36 @@ h1.app-title {
 /* 桌面端样式 */
 @media (min-width: 769px) {
   .app-header {
-    padding: 15px 30px; /* 桌面端header填充 */
+    padding: 10px 30px; /* 桌面端header填充，缩小一点 */
   }
 
   h1.app-title {
-    font-size: 1.8em; /* 桌面端标题字体 */
+    font-size: 2em; /* 桌面端标题字体更大 */
   }
 
   .app-header-logo {
     height: 40px; /* 桌面端logo图标高度 */
   }
 
+  .app-header-logo-fallback-icon {
+    font-size: 2.2em; /* 桌面端备用图标字体大小 */
+  }
+
   .hamburger-menu {
-    display: none; /* 桌面端隐藏汉堡包菜单 */
+    /* 桌面端也显示汉堡包菜单，不再隐藏 */
+    display: block;
+  }
+
+  .header-search-container {
+    max-width: 500px; /* 桌面端搜索框更大 */
+  }
+
+  .notification-icon-container {
+    margin-right: 30px; /* 桌面端右侧间距 */
   }
 
   .app-header .main-nav {
-    gap: 20px; /* 桌面端main-nav的gap */
+    gap: 30px; /* 桌面端main-nav的gap */
   }
 
   .header-right {

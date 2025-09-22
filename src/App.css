@@ -2,7 +2,7 @@
   text-align: center;
   min-height: 100vh;
   font-family: 'Roboto', sans-serif; /* 全局字体 */
-  background-color: #f4f7f6; /* 全局背景色 */
+  background-color: rgba(0, 0, 0, 0.75); /* 全局背景色 */
 }
 
 body {

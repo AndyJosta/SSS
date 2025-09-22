@@ -41,7 +41,15 @@ function App() {
             />
             <Route path="iot-dashboard" element={<IotDashboardPage />} /> {/* IoT 大屏路由 */}
             <Route path="empty5" element={<EmptyPage5 />} />
-            {/* <Route path="detection-dashboard" element={<DetectionDashboardPage />} /> {/* 新增的检测仪表板路由 */} */}
+            <Route path="data-analysis" element={<EmptyPage5 />} />
+            <Route path="device-alerts" element={<EmptyPage5 />} />
+            <Route path="settings" element={<EmptyPage5 />} />
+            <Route path="documentation" element={<EmptyPage5 />} />
+            <Route path="support" element={<EmptyPage5 />} />
+            <Route path="repo/my-tea-project" element={<EmptyPage5 />} />
+            <Route path="repo/iot-integration" element={<EmptyPage5 />} />
+            <Route path="repo/ai-models" element={<EmptyPage5 />} />
+            {/* <Route path="detection-dashboard" element={<DetectionDashboardPage />} />  新增的检测仪表板路由 */}
           </Route>
           <Route path="*" element={<Navigate to="/login" />} />
         </Routes>
