@@ -16,7 +16,7 @@
   position: fixed; /* 保持固定定位，以便与主内容区域并排 */
   left: 0;
   top: 0;
-  width: 80px; /* 手机端侧边栏宽度缩小 */
+  width: 60px; /* 手机端侧边栏宽度进一步缩小 */
   height: 100vh; /* 小屏幕上侧边栏高度 */
   transform: translateX(0); /* 始终显示 */
   z-index: 999; /* 确保在其他内容之上 */
@@ -25,7 +25,7 @@
   background-position: center; /* 图片居中 */
   background-repeat: no-repeat; /* 不重复 */
   color: white;
-  padding: 10px 5px; /* 调整填充 */
+  padding: 10px 0; /* 调整填充，左右为0 */
   box-shadow: 3px 0 15px rgba(0, 0, 0, 0.3); /* 调整box-shadow以适应固定定位 */
   display: flex;
   flex-direction: column;
@@ -65,7 +65,7 @@
   color: #ecf0f1;
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5); /* 增加文字阴影 */
   text-decoration: none;
-  padding: 10px 5px; /* 导航链接填充，更紧凑 */
+  padding: 10px 0; /* 导航链接填充，更紧凑 */
   display: block;
   border-radius: 6px;
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
@@ -75,6 +75,9 @@
   flex-direction: column; /* 文本和图标垂直排列 */
   align-items: center; /* 文本和图标居中 */
   gap: 5px; /* 文本和图标之间的间距 */
+  white-space: nowrap; /* 防止文本换行 */
+  overflow: hidden; /* 隐藏溢出文本 */
+  text-overflow: ellipsis; /* 文本溢出显示省略号 */
 }
 
 .sidebar nav a:hover {
@@ -94,7 +97,7 @@
   padding: 10px; /* 默认（手机）缩小内容填充 */
   background-color: #f4f7f6;
   overflow-y: auto;
-  margin-left: 80px; /* 与侧边栏宽度一致，避免内容被遮挡 */
+  margin-left: 60px; /* 与侧边栏宽度一致，避免内容被遮挡 */
 }
 
 /* 移除侧边栏打开时的遮罩层样式 */

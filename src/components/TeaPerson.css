@@ -230,4 +230,9 @@
     padding: 12px;
     font-size: 0.9em;
   }
+
+  /* 手机端隐藏 TeaPerson 容器 */
+  .tea-person-container {
+    display: none !important;
+  }
 }
