@@ -151,6 +151,7 @@ h1.app-title {
 
   .app-header-logo {
     height: 40px;
+    display: block; /* 确保桌面端 Logo 显示 */
   }
 
   .app-header-logo-fallback-icon {

@@ -614,7 +614,7 @@ const IotDashboardPage = () => {
         <section className="col-span-12 space-y-4 md:col-span-6">
           {/* 环境参数实时监控 */}
           <div className="gradient-border bg-dark/40 p-4 rounded-lg">
-            <div className="flex justify-between items-center mb-4">
+            <div className="flex justify-between items-center mb-4 flex-wrap"> {/* 添加 flex-wrap */}
               <h2 className="text-lg font-bold md:text-xl">环境参数实时监控</h2> {/* 调整标题字体大小 */}
               <div className="flex space-x-2">
                 <button
