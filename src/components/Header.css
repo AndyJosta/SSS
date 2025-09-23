@@ -47,7 +47,7 @@ h1.app-title {
   color: #c9d1d9; /* 与顶部栏文本颜色一致 */
   font-size: 1.4em; /* 默认（手机）汉堡包菜单字体大小 */
   cursor: pointer;
-  display: none; /* 默认在桌面端隐藏 */
+  display: block; /* 默认显示汉堡包菜单 */
   padding: 5px;
   transition: transform 0.3s ease;
 }
@@ -57,9 +57,15 @@ h1.app-title {
 }
 
 .header-search-container {
-  display: none; /* 默认（手机）隐藏搜索栏 */
-  /* flex-grow: 1; */
-  /* margin: 0 10px; */
+  display: flex; /* 默认（桌面）显示搜索栏 */
+  align-items: center;
+  background-color: #161b22; /* 搜索框背景色 */
+  border: 1px solid #30363d;
+  border-radius: 6px;
+  padding: 8px 12px;
+  flex-grow: 1; /* 占据可用空间 */
+  max-width: 400px; /* 最大宽度 */
+  margin: 0 20px; /* 左右间距 */
 }
 
 .header-search-container .search-icon {
@@ -69,7 +75,15 @@ h1.app-title {
 }
 
 .header-search-input {
-  font-size: 0.9em;
+  background-color: #161b22; /* 将背景色设置为与容器一致的深色 */
+  border: none;
+  color: #c9d1d9;
+  flex-grow: 1;
+  outline: none;
+}
+
+.header-search-input:focus {
+  outline: none; /* 消除输入框的焦点白框 */
 }
 
 .header-search-input::placeholder {
@@ -144,7 +158,7 @@ h1.app-title {
   }
 
   .hamburger-menu {
-    display: none; /* 桌面端隐藏汉堡包菜单 */
+    /* display: none; 桌面端隐藏汉堡包菜单 */
   }
 
   .header-search-container {
@@ -184,9 +198,12 @@ h1.app-title {
     font-size: 1.2em;
   }
 
-  .header-search-container,
+  .header-search-container {
+    display: none; /* 手机端隐藏搜索框 */
+  }
+
   .header-right {
-    display: none; /* 手机端隐藏搜索框和用户信息 */
+    display: none; /* 手机端隐藏用户信息 */
   }
 
   .notification-icon-container {

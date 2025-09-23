@@ -384,6 +384,12 @@
     display: flex; /* 桌面端始终显示 */
   }
 
+  /* 桌面端折叠状态的侧边栏 */
+  .sidebar.collapsed {
+    width: 50px; /* 桌面端折叠宽度 */
+    transform: translateX(0); /* 确保在桌面端可见 */
+  }
+
   .sidebar-header .close-sidebar-btn {
     display: none; 
   }
