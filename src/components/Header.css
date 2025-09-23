@@ -9,6 +9,10 @@
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
   height: 60px; /* 固定头部高度 */
+  position: fixed; /* 固定顶部栏 */
+  top: 0; /* 距离顶部 0 */
+  width: 100%; /* 宽度占满 */
+  z-index: 1000; /* 确保在最上层 */
 }
 
 /* 默认（手机）标题选择器 */

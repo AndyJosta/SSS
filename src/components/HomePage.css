@@ -11,6 +11,7 @@
   background-color: rgba(0, 0, 0, 0.5); /* 调整为黑色透明度50% */
   overflow-x: hidden; 
   position: relative; /* 添加相对定位 */
+  padding-top: 60px; /* 顶部栏的高度 */
 }
 
 .sidebar {
@@ -28,7 +29,7 @@
   align-items: flex-start; /* 文本和内容左对齐 */
   overflow-x: hidden; 
   overflow-y: auto; 
-  transition: width 0.3s ease, padding 0.3s ease, transform 0.3s ease;
+  transition: transform 0.3s ease, padding 0.3s ease; /* 移除 width 过渡 */
   transform: translateX(-100%); /* 默认隐藏侧边栏 */
 }
 
@@ -51,7 +52,7 @@
 
 /* 折叠状态样式 */
 .sidebar.collapsed {
-  width: 50px;
+  /* width: 50px; 移除 */
   padding: 16px 0;
   align-items: center; /* 图标居中 */
 }
@@ -84,9 +85,10 @@
 
 /* 展开状态样式 */
 .sidebar.expanded {
-  width: 250px;
+  width: 250px; /* 展开时宽度保持不变 */
   padding: 16px 0;
   align-items: flex-start;
+  transform: translateX(0); /* 展开时显示 */
 }
 
 .sidebar.expanded .sidebar-section-title,
