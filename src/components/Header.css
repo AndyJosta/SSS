@@ -8,6 +8,7 @@
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); /* 更强的阴影 */
   font-family: 'Roboto', sans-serif;
   box-sizing: border-box;
+  height: 60px; /* 固定头部高度 */
 }
 
 /* 默认（手机）标题选择器 */
@@ -42,7 +43,7 @@ h1.app-title {
   color: #c9d1d9; /* 与顶部栏文本颜色一致 */
   font-size: 1.5em; /* 默认（手机）汉堡包菜单字体大小 */
   cursor: pointer;
-  display: block; /* 默认（手机）显示汉堡包菜单 */
+  display: none; /* 默认在桌面端隐藏 */
   padding: 5px;
   transition: transform 0.3s ease;
 }
@@ -120,7 +121,7 @@ h1.app-title {
 }
 
 .header-right {
-  display: flex; /* 默认（手机）隐藏用户信息和退出按钮 */
+  display: flex; /* 默认桌面端显示 */
   align-items: center;
   gap: 15px;
 }
@@ -169,12 +170,12 @@ h1.app-title {
   }
 
   .hamburger-menu {
-    /* 桌面端也显示汉堡包菜单，不再隐藏 */
-    display: block;
+    display: none; /* 桌面端隐藏汉堡包菜单 */
   }
 
   .header-search-container {
     max-width: 500px; /* 桌面端搜索框更大 */
+    display: flex; /* 桌面端显示搜索框 */
   }
 
   .notification-icon-container {
@@ -192,6 +193,34 @@ h1.app-title {
   /* 汉堡包菜单已移除 */
 }
 
-/* 响应式调整已移除 */
+/* 手机端（小于等于 768px）的样式调整 */
+@media (max-width: 768px) {
+  .app-header {
+    padding: 8px 10px; /* 手机端更小的填充 */
+    height: 50px; /* 手机端头部高度 */
+  }
+
+  .app-header-logo {
+    height: 25px; /* 手机端logo更小 */
+  }
+
+  h1.app-title {
+    font-size: 1.4em; /* 手机端标题字体更小 */
+  }
+
+  .hamburger-menu {
+    display: block; /* 手机端显示汉堡包菜单 */
+    font-size: 1.2em;
+  }
+
+  .header-search-container,
+  .header-right {
+    display: none; /* 手机端隐藏搜索框和用户信息 */
+  }
+
+  .notification-icon-container {
+    margin-right: 10px; /* 手机端通知图标间距 */
+  }
+}
 
 /* 确保 hamburger-menu 在任何情况下都不显示已移除 */

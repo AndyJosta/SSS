@@ -10,6 +10,7 @@
   font-family: 'Roboto', sans-serif;
   background-color: rgba(0, 0, 0, 0.5); /* 调整为黑色透明度50% */
   overflow-x: hidden; 
+  position: relative; /* 添加相对定位 */
 }
 
 .sidebar {
@@ -358,6 +359,7 @@
   overflow-y: auto;
   margin-left: 250px; /* 侧边栏的固定宽度 */
   transition: margin-left 0.3s ease; 
+  width: calc(100% - 250px); /* 初始宽度 */
 }
 
 /* Main content 根据侧边栏状态调整 */
@@ -367,6 +369,7 @@
 
 .main-content.expanded-content {
   margin-left: 250px; /* 对应展开侧边栏宽度 */
+  width: calc(100% - 250px); /* 展开时宽度 */
 }
 
 /* 桌面端样式 */
@@ -401,13 +404,16 @@
     transform: translateX(-100%); 
     box-shadow: none; 
     padding: 0; 
+    top: 50px; /* 手机端头部高度 */
+    height: calc(100vh - 50px); /* 手机端侧边栏高度 */
   }
 
   .sidebar.expanded {
-    width: 80%; 
-    max-width: 250px; 
-    transform: translateX(0); 
-    box-shadow: 3px 0 15px rgba(0, 0, 0, 0.5); 
+    width: 250px; /* 手机端展开宽度 */
+    max-width: 80%; /* 最大宽度 */
+    transform: translateX(0);
+    box-shadow: 3px 0 15px rgba(0, 0, 0, 0.5);
+    background-color: #0d1117; /* 确保背景色覆盖 */
   }
 
   .sidebar-header {
@@ -448,7 +454,7 @@
   }
 
   .main-content {
-    margin-left: 0; 
+    margin-left: 0; /* 手机端主内容无左边距 */
     width: 100%;
     padding: 15px;
   }
