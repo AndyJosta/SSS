@@ -14,7 +14,7 @@
 /* 默认（手机）标题选择器 */
 h1.app-title {
   margin: 0;
-  font-size: 1.7em; /* 调整字体大小 */
+  font-size: 1.5em; /* 调整字体大小，适配手机 */
   font-weight: 700; /* 更粗的字体 */
   letter-spacing: 0.8px; /* 增加字母间距 */
   text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* 增加文字阴影 */
@@ -23,17 +23,17 @@ h1.app-title {
 .logo-group {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px; /* 调整间距 */
 }
 
 .app-header-logo {
-  height: 30px; /* 默认（手机）logo图标高度 */
+  height: 28px; /* 默认（手机）logo图标高度 */
   width: auto;
   object-fit: contain;
 }
 
 .app-header-logo-fallback-icon {
-  font-size: 1.8em; /* 默认（手机）备用图标字体大小 */
+  font-size: 1.6em; /* 默认（手机）备用图标字体大小 */
   color: #c9d1d9; /* 与顶部栏文本颜色一致 */
 }
 
@@ -41,7 +41,7 @@ h1.app-title {
   background: none;
   border: none;
   color: #c9d1d9; /* 与顶部栏文本颜色一致 */
-  font-size: 1.5em; /* 默认（手机）汉堡包菜单字体大小 */
+  font-size: 1.4em; /* 默认（手机）汉堡包菜单字体大小 */
   cursor: pointer;
   display: none; /* 默认在桌面端隐藏 */
   padding: 5px;
@@ -53,31 +53,19 @@ h1.app-title {
 }
 
 .header-search-container {
-  display: flex;
-  align-items: center;
-  background-color: #161b22; /* 搜索框背景色 */
-  border: 1px solid #30363d;
-  border-radius: 6px;
-  padding: 8px 12px;
-  flex-grow: 1; /* 占据可用空间 */
-  max-width: 400px; /* 最大宽度 */
-  margin: 0 20px; /* 左右间距 */
+  display: none; /* 默认（手机）隐藏搜索栏 */
+  /* flex-grow: 1; */
+  /* margin: 0 10px; */
 }
 
 .header-search-container .search-icon {
   color: #8b949e;
-  margin-right: 8px;
-  font-size: 1.1em;
+  margin-right: 6px;
+  font-size: 1em;
 }
 
 .header-search-input {
-  background: none;
-  border: none;
-  color: #c9d1d9;
-  flex-grow: 1;
-  outline: none;
-  font-size: 1em;
-  width: 100%;
+  font-size: 0.9em;
 }
 
 .header-search-input::placeholder {
@@ -87,18 +75,18 @@ h1.app-title {
 .app-header .main-nav {
   display: flex;
   align-items: center;
-  gap: 20px; /* 调整间距 */
+  gap: 15px; /* 调整间距 */
 }
 
 .notification-icon-container {
   position: relative;
-  margin-right: 20px; /* 右侧间距 */
+  margin-right: 15px; /* 右侧间距 */
   cursor: pointer;
 }
 
 .notification-icon {
   color: #8b949e;
-  font-size: 1.5em;
+  font-size: 1.4em;
   transition: color 0.2s ease;
 }
 
@@ -107,17 +95,8 @@ h1.app-title {
 }
 
 .notification-badge {
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  background-color: #e74c3c; /* 红色徽章 */
-  color: white;
-  border-radius: 50%;
-  padding: 2px 6px;
-  font-size: 0.75em;
-  font-weight: 600;
-  min-width: 15px; /* 确保数字居中 */
-  text-align: center;
+  font-size: 0.7em;
+  min-width: 14px;
 }
 
 .header-right {
@@ -127,21 +106,12 @@ h1.app-title {
 }
 
 .header-right .username {
-  font-size: 1.05em; /* 稍微增大字体 */
-  font-weight: 500; /* 调整字体粗细 */
-  color: #e0e0e0; /* 稍微亮一点的颜色 */
+  font-size: 0.95em;
 }
 
 .main-nav .logout-button {
-  background-color: #e74c3c; /* 红色退出按钮 */
-  color: #ffffff;
-  border: none;
-  padding: 10px 20px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 1.05em; /* 稍微增大字体 */
-  font-weight: 600; /* 调整字体粗细 */
-  transition: background-color 0.3s ease, transform 0.2s ease;
+  padding: 8px 15px;
+  font-size: 0.95em;
 }
 
 .main-nav .logout-button:hover {
@@ -154,19 +124,19 @@ h1.app-title {
 /* 桌面端样式 */
 @media (min-width: 769px) {
   .app-header {
-    padding: 10px 30px; /* 桌面端header填充，缩小一点 */
+    padding: 10px 30px;
   }
 
   h1.app-title {
-    font-size: 2em; /* 桌面端标题字体更大 */
+    font-size: 2em;
   }
 
   .app-header-logo {
-    height: 40px; /* 桌面端logo图标高度 */
+    height: 40px;
   }
 
   .app-header-logo-fallback-icon {
-    font-size: 2.2em; /* 桌面端备用图标字体大小 */
+    font-size: 2.2em;
   }
 
   .hamburger-menu {
@@ -176,21 +146,18 @@ h1.app-title {
   .header-search-container {
     max-width: 500px; /* 桌面端搜索框更大 */
     display: flex; /* 桌面端显示搜索框 */
+    flex-grow: 1; /* 占据可用空间 */
+    margin: 0 20px;
   }
 
-  .notification-icon-container {
-    margin-right: 30px; /* 桌面端右侧间距 */
+  .header-search-container .search-icon {
+    font-size: 1.1em;
+    margin-right: 8px;
   }
 
-  .app-header .main-nav {
-    gap: 30px; /* 桌面端main-nav的gap */
+  .header-search-input {
+    font-size: 1em;
   }
-
-  .header-right {
-    display: flex; /* 桌面端显示用户信息和退出按钮 */
-  }
-
-  /* 汉堡包菜单已移除 */
 }
 
 /* 手机端（小于等于 768px）的样式调整 */
@@ -223,4 +190,76 @@ h1.app-title {
   }
 }
 
-/* 确保 hamburger-menu 在任何情况下都不显示已移除 */
+@media (max-width: 480px) {
+  .app-header {
+    padding: 6px 10px;
+  }
+
+  h1.app-title {
+    font-size: 1.3em;
+  }
+
+  .app-header-logo {
+    height: 25px;
+  }
+
+  .app-header-logo-fallback-icon {
+    font-size: 1.4em;
+  }
+
+  .hamburger-menu {
+    font-size: 1.3em;
+  }
+
+  .notification-icon-container {
+    margin-right: 10px;
+  }
+
+  .notification-icon {
+    font-size: 1.3em;
+  }
+
+  .notification-badge {
+    font-size: 0.65em;
+    min-width: 13px;
+    top: -6px;
+    right: -6px;
+  }
+}
+
+@media (max-width: 375px) { /* 针对更小尺寸的手机 */
+  .app-header {
+    padding: 5px 8px;
+  }
+
+  h1.app-title {
+    font-size: 1.2em;
+  }
+
+  .app-header-logo {
+    height: 22px;
+  }
+
+  .app-header-logo-fallback-icon {
+    font-size: 1.3em;
+  }
+
+  .hamburger-menu {
+    font-size: 1.2em;
+  }
+
+  .notification-icon-container {
+    margin-right: 8px;
+  }
+
+  .notification-icon {
+    font-size: 1.2em;
+  }
+
+  .notification-badge {
+    font-size: 0.6em;
+    min-width: 12px;
+    top: -5px;
+    right: -5px;
+  }
+}

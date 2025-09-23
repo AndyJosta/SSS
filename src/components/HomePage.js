@@ -131,16 +131,18 @@ const HomePage = () => {
           <div className="sidebar-footer">
             <p>&copy; 2025 茶叶管理系统</p> {/* 修改版权信息为您的应用名称 */}
             <div className="footer-links">
-              <a href="javascript:void(0)" target="_blank" rel="noopener noreferrer">关于我们</a>
-              <a href="javascript:void(0)" target="_blank" rel="noopener noreferrer">服务条款</a>
-              <a href="javascript:void(0)" target="_blank" rel="noopener noreferrer">隐私政策</a>
-              <a href="javascript:void(0)" target="_blank" rel="noopener noreferrer">联系我们</a>
+              <a href="" onClick={(e) => e.preventDefault()} target="_blank" rel="noopener noreferrer">关于我们</a>
+              <a href="" onClick={(e) => e.preventDefault()} target="_blank" rel="noopener noreferrer">服务条款</a>
+              <a href="" onClick={(e) => e.preventDefault()} target="_blank" rel="noopener noreferrer">隐私政策</a>
+              <a href="" onClick={(e) => e.preventDefault()} target="_blank" rel="noopener noreferrer">联系我们</a>
             </div>
           </div>
           {/* 新增的收起侧边栏按钮 */} 
-          <button className="collapse-sidebar-button" onClick={toggleSidebar}> 
-            <FontAwesomeIcon icon={faChevronLeft} /> 
-          </button> 
+          {isSidebarExpanded && (
+            <button className="collapse-sidebar-button" onClick={toggleSidebar}> 
+              <FontAwesomeIcon icon={faChevronLeft} /> 
+            </button>
+          )} 
         </aside>
         <main className={`main-content ${isSidebarExpanded ? 'expanded-content' : 'collapsed-content'}`}> 
           <Outlet />

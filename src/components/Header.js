@@ -10,7 +10,7 @@ const Header = ({ toggleSidebar, isSidebarExpanded }) => {
   const userRole = localStorage.getItem('userRole'); 
   const [logoError, setLogoError] = useState(false);
   const [searchText, setSearchText] = useState(''); // 搜索文本状态
-  const [notificationCount, setNotificationCount] = useState(2); // 通知数量状态，默认为2
+  const [notificationCount, ] = useState(2); // 通知数量状态，默认为2
 
   const handleLogoError = () => {
     setLogoError(true);
