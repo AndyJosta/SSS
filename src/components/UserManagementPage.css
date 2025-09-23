@@ -134,6 +134,11 @@
   border-spacing: 0 8px; /* 行间距 */
   padding: 0 20px;
   box-sizing: border-box;
+  display: table; /* 确保桌面端显示为表格 */
+}
+
+.user-card-list.mobile-list {
+  display: none; /* 默认在桌面端隐藏移动端卡片列表 */
 }
 
 .desktop-table thead {

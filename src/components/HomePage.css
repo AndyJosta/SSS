@@ -29,7 +29,7 @@
   align-items: flex-start; /* 文本和内容左对齐 */
   overflow-x: hidden; 
   overflow-y: auto; 
-  transition: transform 0.3s ease, padding 0.3s ease; /* 移除 width 过渡 */
+  transition: transform 0.3s ease; /* 只保留 transform 过渡 */
   transform: translateX(-100%); /* 默认隐藏侧边栏 */
 }
 
@@ -53,7 +53,7 @@
 /* 折叠状态样式 */
 .sidebar.collapsed {
   /* width: 50px; 移除 */
-  padding: 16px 0;
+  padding: 16px 0; /* 保持桌面端折叠时的 padding */
   align-items: center; /* 图标居中 */
 }
 
@@ -352,19 +352,22 @@
   padding: 30px;
   background-color: rgba(0, 0, 0, 0.5); /* 调整为黑色透明度50% */
   overflow-y: auto;
-  margin-left: 0; /* 默认（手机）没有左外边距 */
-  transition: margin-left 0.3s ease; 
+  /* margin-left: 0; 默认（手机）没有左外边距 */
+  transition: transform 0.3s ease; /* 更改为 transform 过渡 */
   width: calc(100% - 250px); /* 初始宽度 */
+  transform: translateX(250px); /* 初始位置与展开的侧边栏同步 */
 }
 
 /* Main content 根据侧边栏状态调整 */
 .main-content.collapsed-content {
-  margin-left: 0; /* 手机端折叠时 */
+  /* margin-left: 0; 手机端折叠时 */
+  transform: translateX(50px); /* 折叠时移动 50px */
 }
 
 .main-content.expanded-content {
   margin-left: 250px; /* 对应展开侧边栏宽度 */
   width: calc(100% - 250px); /* 展开时宽度 */
+  transform: translateX(0); /* 展开时回到原位 */
 }
 
 /* 桌面端样式 */
@@ -396,14 +399,17 @@
 
   .main-content {
     margin-left: 250px; 
+    transform: translateX(0); /* 移除 transform 影响 */
   }
 
   .main-content.collapsed-content {
     margin-left: 50px; /* 对应折叠侧边栏宽度 */
+    transform: translateX(0); /* 移除 transform 影响 */
   }
 
   .main-content.expanded-content {
     margin-left: 250px; /* 对应展开侧边栏宽度 */
+    transform: translateX(0); /* 移除 transform 影响 */
   }
 
   .collapse-sidebar-button {
