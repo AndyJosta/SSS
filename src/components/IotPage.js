@@ -511,9 +511,10 @@ const IotDashboardPage = () => {
   }, [currentPeriod, dashboardData, updateCharts]); // 添加 updateCharts 作为依赖项
 
   return (
-    <div className="font-sans text-light min-h-screen p-4 grid grid-cols-12 gap-4 md:p-6 md:gap-6">
-      {/* 顶部导航栏 (已删除，因为HomePage已包含Header) */}
-      {/* <header className="bg-primary/10 backdrop-blur-sm border-b border-primary/20 px-6 py-3 flex items-center justify-between">
+    <div className="iot-dashboard-wrapper">
+      <div className="font-sans text-light min-h-screen p-4 grid grid-cols-12 gap-4 md:p-6 md:gap-6">
+        {/* 顶部导航栏 (已删除，因为HomePage已包含Header) */}
+        {/* <header className="bg-primary/10 backdrop-blur-sm border-b border-primary/20 px-6 py-3 flex items-center justify-between">
         <div className="flex items-center space-x-3">
           <i className="fa fa-leaf text-2xl text-secondary"></i>
           <h1 className="text-[clamp(1.5rem,3vw,2rem)] font-bold text-shadow">茶叶物联网监控中心</h1>
@@ -772,6 +773,7 @@ const IotDashboardPage = () => {
             </button>
           </div>
         </section>
+    </div>
     </div>
   );
 };

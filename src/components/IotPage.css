@@ -44,6 +44,12 @@ body {
   background: rgba(129, 199, 132, 0.8);
 }
 
+.iot-dashboard-wrapper {
+  max-height: calc(100vh - 80px); /* 假设Header高度为80px，留出一些空间 */
+  overflow-y: auto;
+  padding-right: 8px; /* 为滚动条留出空间，避免内容被遮挡 */
+}
+
 /* 图表容器样式 */
 .chart-container {
   position: relative;
