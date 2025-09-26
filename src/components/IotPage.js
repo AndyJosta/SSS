@@ -550,11 +550,11 @@ const IotDashboardPage = () => {
         {/* 左侧区域 - 统计卡片 */}
         <section className="col-span-12 space-y-4 md:col-span-3">
           {/* 茶园数量 */}
-          <div className="stat-card gradient-border bg-dark/40 p-4 rounded-lg">
+          <div className="stat-card gradient-border bg-dark/40 p-4 rounded-lg relative">
             <div className="flex justify-between items-start mb-3">
-              <h3 className="text-light/80 font-medium text-base">茶园数量</h3>
-              <i className="fa fa-map-marker text-secondary"></i>
+              <h3 className="text-light/80 font-medium text-base">茶园<br/>数量</h3>
             </div>
+            <i className="fa fa-map-marker text-gray-400 absolute top-4 right-4 text-lg"></i>
             <div className="flex items-end">
               <span className="text-3xl font-bold" id="tea-garden-count">{dashboardData.teaGardenCount}</span>
               <span className="text-secondary ml-2 mb-1"><i className="fa fa-arrow-up"></i> {dashboardData.teaGardenCountChange}%</span>
@@ -563,11 +563,11 @@ const IotDashboardPage = () => {
           </div>
 
           {/* 设备总数 */}
-          <div className="stat-card gradient-border bg-dark/40 p-4 rounded-lg">
+          <div className="stat-card gradient-border bg-dark/40 p-4 rounded-lg relative">
             <div className="flex justify-between items-start mb-3">
-              <h3 className="text-light/80 font-medium text-base">设备总数</h3>
-              <i className="fa fa-microchip text-secondary"></i>
+              <h3 className="text-light/80 font-medium text-base">设备<br/>总数</h3>
             </div>
+            <i className="fa fa-microchip text-gray-400 absolute top-4 right-4 text-lg"></i>
             <div className="flex items-end">
               <span className="text-3xl font-bold" id="device-count">{dashboardData.deviceCount}</span>
               <span className="text-secondary ml-2 mb-1"><i className="fa fa-check"></i> 100%</span>
@@ -576,11 +576,11 @@ const IotDashboardPage = () => {
           </div>
 
           {/* 预警数量 */}
-          <div className="stat-card gradient-border bg-dark/40 p-4 rounded-lg">
+          <div className="stat-card gradient-border bg-dark/40 p-4 rounded-lg relative">
             <div className="flex justify-between items-start mb-3">
-              <h3 className="text-light/80 font-medium text-base">预警数量</h3>
-              <i className="fa fa-exclamation-triangle text-accent"></i>
+              <h3 className="text-light/80 font-medium text-base">预警<br/>数量</h3>
             </div>
+            <i className="fa fa-exclamation-triangle text-accent absolute top-4 right-4 text-lg"></i>
             <div className="flex items-end">
               <span className="text-3xl font-bold text-accent" id="alert-count">{dashboardData.alertCount}</span>
               <span className="text-warning ml-2 mb-1"><i className="fa fa-arrow-up"></i> {dashboardData.alertNew}</span>
@@ -589,15 +589,15 @@ const IotDashboardPage = () => {
           </div>
 
           {/* 平均产量 */}
-          <div className="stat-card gradient-border bg-dark/40 p-4 rounded-lg">
+          <div className="stat-card gradient-border bg-dark/40 p-4 rounded-lg relative">
             <div className="flex justify-between items-start mb-3">
-              <h3 className="text-light/80 font-medium text-base">平均产量</h3>
-              <i className="fa fa-bar-chart text-secondary"></i>
+              <h3 className="text-light/80 font-medium text-base">平均<br/>产量</h3>
             </div>
+            <i className="fa fa-bar-chart text-gray-400 absolute top-4 right-4 text-lg"></i>
             <div className="flex items-end">
               <span className="text-3xl font-bold" id="avg-yield">{dashboardData.avgYield}</span>
-              <span className="ml-2 mb-1">kg/亩</span>
             </div>
+            <div className="text-sm text-light/60">kg/亩</div> {/* 将"kg/亩"移动到下方 */}
             <div className="mt-2 text-xs text-light/60">本年度平均</div>
           </div>
 

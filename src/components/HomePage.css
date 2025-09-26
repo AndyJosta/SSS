@@ -353,9 +353,9 @@
   background-color: rgba(0, 0, 0, 0.5); /* 调整为黑色透明度50% */
   overflow-y: auto;
   /* margin-left: 0; 默认（手机）没有左外边距 */
-  transition: transform 0.3s ease; /* 更改为 transform 过渡 */
-  width: calc(100% - 250px); /* 初始宽度 */
-  transform: translateX(250px); /* 初始位置与展开的侧边栏同步 */
+  transition: margin-left 0.3s ease; /* 更改为 margin-left 过渡 */
+  width: 100%; /* 默认宽度 */
+  transform: none; /* 移除 transform 影响 */
 }
 
 /* Main content 根据侧边栏状态调整 */
@@ -398,17 +398,20 @@
   }
 
   .main-content {
-    margin-left: 250px; 
+    margin-left: 250px; /* 侧边栏展开时的默认左外边距 */
+    width: calc(100% - 250px); /* 侧边栏展开时的宽度 */
     transform: translateX(0); /* 移除 transform 影响 */
   }
 
   .main-content.collapsed-content {
     margin-left: 50px; /* 对应折叠侧边栏宽度 */
+    width: calc(100% - 50px); /* 侧边栏折叠时的宽度 */
     transform: translateX(0); /* 移除 transform 影响 */
   }
 
   .main-content.expanded-content {
     margin-left: 250px; /* 对应展开侧边栏宽度 */
+    width: calc(100% - 250px); /* 侧边栏展开时的宽度 */
     transform: translateX(0); /* 移除 transform 影响 */
   }
 
@@ -477,6 +480,7 @@
     margin-left: 0; /* 手机端主内容无左边距 */
     width: 100%;
     padding: 10px; /* 减少主内容区域的填充 */
+    transform: none; /* 移除 transform 影响 */
   }
 
   .homepage-container {

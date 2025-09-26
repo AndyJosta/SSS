@@ -138,6 +138,9 @@ body {
 
   .stat-card h3 {
     font-size: 0.95em;
+    line-height: 1.2em; /* 优化行高 */
+    letter-spacing: 0.02em; /* 优化字间距 */
+    text-align: left; /* 左对齐 */
   }
 
   .stat-card span.text-3xl {
@@ -205,6 +208,9 @@ body {
 
   .stat-card h3 {
     font-size: 0.9em;
+    line-height: 1.2em; /* 优化行高 */
+    letter-spacing: 0.02em; /* 优化字间距 */
+    text-align: left; /* 左对齐 */
   }
 
   .stat-card span.text-3xl {
