@@ -29,7 +29,7 @@
   align-items: flex-start; /* 文本和内容左对齐 */
   overflow-x: hidden; 
   overflow-y: auto; 
-  transition: transform 0.3s ease; /* 只保留 transform 过渡 */
+  transition: width 0.3s ease, transform 0.3s ease; /* 添加 width 到 transition */
   transform: translateX(-100%); /* 默认隐藏侧边栏 */
 }
 
@@ -352,22 +352,22 @@
   padding: 30px;
   background-color: rgba(0, 0, 0, 0.5); /* 调整为黑色透明度50% */
   overflow-y: auto;
-  /* margin-left: 0; 默认（手机）没有左外边距 */
-  transition: transform 0.3s ease; /* 更改为 transform 过渡 */
+  transition: margin-left 0.3s ease, width 0.3s ease; /* 添加 margin-left 和 width 到 transition */
+  margin-left: 250px; /* 初始宽度，假设侧边栏是展开的 */
   width: calc(100% - 250px); /* 初始宽度 */
-  transform: translateX(250px); /* 初始位置与展开的侧边栏同步 */
+  /* transform: translateX(250px); 初始位置与展开的侧边栏同步，但在桌面端移除此项 */
 }
 
 /* Main content 根据侧边栏状态调整 */
 .main-content.collapsed-content {
   /* margin-left: 0; 手机端折叠时 */
-  transform: translateX(50px); /* 折叠时移动 50px */
+  /* transform: translateX(50px); 折叠时移动 50px，在桌面端移除 */
 }
 
 .main-content.expanded-content {
   margin-left: 250px; /* 对应展开侧边栏宽度 */
   width: calc(100% - 250px); /* 展开时宽度 */
-  transform: translateX(0); /* 展开时回到原位 */
+  /* transform: translateX(0); 展开时回到原位，在桌面端移除 */
 }
 
 /* 桌面端样式 */
@@ -378,19 +378,26 @@
 
   .sidebar {
     position: fixed; 
-    width: 250px; 
-    transform: translateX(0); 
-    box-shadow: 3px 0 8px rgba(0, 0, 0, 0.2); 
-    background-image: none; 
-    padding: 16px 0; 
-    align-items: flex-start; 
+    top: 60px; /* 顶部栏的高度 */
+    height: calc(100vh - 60px); /* 占据剩余垂直空间 */
+    background-color: #0d1117; /* 确保背景色 */
+    z-index: 999; /* 确保在最上层 */
+    padding: 16px 0;
     display: flex; /* 桌面端始终显示 */
+    flex-direction: column;
+    transition: width 0.3s ease; /* 桌面端侧边栏只过渡宽度 */
+    transform: translateX(0); /* 桌面端始终可见 */
+    box-shadow: 3px 0 8px rgba(0, 0, 0, 0.2); 
   }
 
   /* 桌面端折叠状态的侧边栏 */
   .sidebar.collapsed {
     width: 50px; /* 桌面端折叠宽度 */
-    transform: translateX(0); /* 确保在桌面端可见 */
+  }
+
+  /* 桌面端展开状态的侧边栏 */
+  .sidebar.expanded {
+    width: 250px; /* 桌面端展开宽度 */
   }
 
   .sidebar-header .close-sidebar-btn {
@@ -398,22 +405,29 @@
   }
 
   .main-content {
-    margin-left: 250px; 
-    transform: translateX(0); /* 移除 transform 影响 */
+    padding: 30px;
+    /* 移除 transform */
   }
 
   .main-content.collapsed-content {
     margin-left: 50px; /* 对应折叠侧边栏宽度 */
-    transform: translateX(0); /* 移除 transform 影响 */
+    width: calc(100% - 50px); /* 填充剩余空间 */
   }
 
   .main-content.expanded-content {
     margin-left: 250px; /* 对应展开侧边栏宽度 */
-    transform: translateX(0); /* 移除 transform 影响 */
+    width: calc(100% - 250px); /* 填充剩余空间 */
   }
 
   .collapse-sidebar-button {
     display: flex; /* 桌面端显示收起按钮 */
+    right: -20px; /* 调整位置使其位于侧边栏边缘 */
+    border-radius: 50%; /* 桌面端为圆形 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 添加阴影 */
+  }
+
+  .collapse-sidebar-button:hover {
+    transform: translateY(-50%) scale(1.1); /* 悬停时放大一点 */
   }
 }
 
@@ -468,6 +482,15 @@
     padding: 10px 16px;
   }
 
+  .sidebar-repo-list a:hover {
+    background-color: #161b22;
+    color: #ffffff;
+  }
+
+  .sidebar-repo-list a svg {
+    color: #3b82f6; 
+  }
+
   .sidebar-footer {
     padding: 12px 16px;
     margin-top: 16px;
@@ -477,7 +500,7 @@
     margin-left: 0; /* 手机端主内容无左边距 */
     width: 100%;
     padding: 10px; /* 减少主内容区域的填充 */
-    transform: translateX(0); /* 确保在手机端无偏移 */
+    transform: none; /* 移除 transform */
   }
 
   .homepage-container {
@@ -485,56 +508,15 @@
     padding-left: 0; /* 移除左侧填充 */
     padding-right: 0; /* 移除右侧填充 */
   }
+
+  .collapse-sidebar-button {
+    display: none; /* 手机端不显示收起按钮 */
+  }
 }
 
 @media (max-width: 480px) {
   .sidebar.expanded {
     width: 90%; 
     max-width: 200px; /* 更小的侧边栏宽度 */
-  }
-
-  .sidebar nav a {
-    font-size: 14px; /* 减小字体 */
-    padding: 8px 12px; /* 调整填充 */
-  }
-
-  .sidebar-section-title {
-    font-size: 11px; /* 减小标题字体 */
-    padding: 10px 12px 5px;
-    margin-top: 10px;
-  }
-
-  .sidebar-repo-search {
-    margin: 6px 12px;
-    padding: 6px 8px;
-  }
-
-  .sidebar-search-input {
-    font-size: 13px;
-  }
-
-  .sidebar-repo-list a {
-    font-size: 14px;
-    padding: 8px 12px;
-  }
-
-  .sidebar-footer {
-    padding: 10px 12px;
-    margin-top: 12px;
-    font-size: 11px;
-  }
-
-  .sidebar-footer .footer-links {
-    gap: 5px;
-  }
-
-  .collapse-sidebar-button {
-    width: 35px; 
-    height: 35px; 
-    font-size: 16px; 
-  }
-
-  .main-content {
-    padding: 10px;
   }
 }
