@@ -6,11 +6,11 @@
 
 .homepage-container {
   display: flex; 
-  flex-grow: 1; 
   font-family: 'Roboto', sans-serif;
   background-color: rgba(0, 0, 0, 0.5); /* 调整为黑色透明度50% */
   overflow-x: hidden; 
   position: relative; /* 添加相对定位 */
+  height: calc(100vh - 60px); /* 桌面端高度 */
   /* padding-top: 60px; 顶部栏的高度，在 Header 中处理 */
 }
 
@@ -28,7 +28,7 @@
   flex-direction: column;
   align-items: flex-start; /* 文本和内容左对齐 */
   overflow-x: hidden; 
-  overflow-y: auto; 
+  overflow-y: hidden; /* 桌面版侧边栏展开后不显示滚动条 */
   transition: width 0.3s ease, transform 0.3s ease; /* 添加 width 到 transition */
   transform: translateX(-100%); /* 默认隐藏侧边栏 */
 }
@@ -351,7 +351,6 @@
   flex-grow: 1;
   padding: 30px;
   background-color: rgba(0, 0, 0, 0.5); /* 调整为黑色透明度50% */
-  overflow-y: auto;
   transition: margin-left 0.3s ease, width 0.3s ease; /* 添加 margin-left 和 width 到 transition */
   margin-left: 250px; /* 初始宽度，假设侧边栏是展开的 */
   width: calc(100% - 250px); /* 初始宽度 */
@@ -388,6 +387,7 @@
     transition: width 0.3s ease; /* 桌面端侧边栏只过渡宽度 */
     transform: translateX(0); /* 桌面端始终可见 */
     box-shadow: 3px 0 8px rgba(0, 0, 0, 0.2); 
+    overflow-y: hidden; /* 桌面版侧边栏展开后不显示滚动条 */
   }
 
   /* 桌面端折叠状态的侧边栏 */
@@ -506,6 +506,8 @@
     width: 100%;
     padding: 10px; /* 减少主内容区域的填充 */
     transform: none; /* 移除 transform */
+    height: 100%; /* 确保在手机端有明确高度 */
+    overflow-y: auto; /* 手机端内容区域独立滚动 */
   }
 
   /* 移除手机端特有的 collapsed-content 和 expanded-content 样式 */
@@ -516,6 +518,7 @@
   }
 
   .homepage-container {
+    height: calc(100vh - 50px); /* 手机端高度 */
     /* padding-top: 50px; 调整为手机端头部高度，由 Header 组件控制 */
     padding-left: 0; /* 移除左侧填充 */
     padding-right: 0; /* 移除右侧填充 */
