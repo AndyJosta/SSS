@@ -11,7 +11,7 @@
   background-color: rgba(0, 0, 0, 0.5); /* 调整为黑色透明度50% */
   overflow-x: hidden; 
   position: relative; /* 添加相对定位 */
-  padding-top: 60px; /* 顶部栏的高度 */
+  /* padding-top: 60px; 顶部栏的高度，在 Header 中处理 */
 }
 
 .sidebar {
@@ -442,6 +442,11 @@
     height: calc(100vh - 50px); /* 手机端侧边栏高度 */
   }
 
+  .sidebar.collapsed {
+    width: 0; /* 手机端折叠宽度 */
+    transform: translateX(-100%); /* 手机端折叠时完全隐藏 */
+  }
+
   .sidebar.expanded {
     width: 250px; /* 手机端展开宽度 */
     max-width: 80%; /* 最大宽度 */
@@ -503,8 +508,15 @@
     transform: none; /* 移除 transform */
   }
 
+  /* 移除手机端特有的 collapsed-content 和 expanded-content 样式 */
+  .main-content.collapsed-content,
+  .main-content.expanded-content {
+    margin-left: 0; 
+    width: 100%;
+  }
+
   .homepage-container {
-    padding-top: 50px; /* 调整为手机端头部高度 */
+    /* padding-top: 50px; 调整为手机端头部高度，由 Header 组件控制 */
     padding-left: 0; /* 移除左侧填充 */
     padding-right: 0; /* 移除右侧填充 */
   }
