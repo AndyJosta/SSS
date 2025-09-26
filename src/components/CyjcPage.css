@@ -108,28 +108,34 @@
 }
 
 .image-preview {
-  margin-top: 40px;
+  width: 100px; /* 缩放图的固定宽度 */
+  height: 100px; /* 缩放图的固定高度 */
+  margin-top: 15px; /* 调整间距 */
+  margin-bottom: 15px; /* 添加底部间距 */
   text-align: center;
-  border: 1px solid #c0c0c0; /* 调整边框颜色 */
-  padding: 30px;
-  border-radius: 12px;
-  background-color: rgba(235, 235, 235, 0.9); /* 调整背景色透明度 */
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid #d0d0d0; /* 调整边框颜色 */
+  padding: 5px; /* 调整内边距 */
+  border-radius: 8px; /* 调整圆角 */
+  background-color: rgba(235, 235, 235, 0.8); /* 调整背景色透明度 */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  display: flex; /* 使用 flex 布局 */
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  overflow: hidden; /* 隐藏超出部分 */
 }
 
 .image-preview h2 {
-  color: #2c3e50; /* 调整标题颜色 */
-  margin-bottom: 25px;
-  font-size: 2em;
+  display: none; /* 隐藏图片预览标题 */
 }
 
 .image-preview img {
-  max-width: 100%;
-  height: auto;
-  max-height: 450px;
-  border-radius: 10px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-  border: 2px solid #d0d0d0; /* 调整边框颜色 */
+  width: 90px; /* 图片实际显示宽度 */
+  height: 90px; /* 图片实际显示高度 */
+  object-fit: contain; /* 确保图片完整显示，不裁剪 */
+  border-radius: 6px;
+  box-shadow: none; /* 移除阴影 */
+  border: none; /* 移除边框 */
+  cursor: pointer; /* 添加鼠标手势 */
 }
 
 .detection-results {
@@ -204,6 +210,14 @@
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
 }
 
+/* Loader 动画的样式 */
+.loader-wrapper {
+  transform: scale(0.3); /* 缩小 Loader 到原始大小的 30% */
+  transform-origin: center center; /* 确保缩放以中心为原点 */
+  margin-bottom: -50px; /* 向上移动，使其更靠近“检测中”文本 */
+  margin-top: -30px; /* 调整顶部距离 */
+}
+
 .loading-indicator p {
   margin-top: 20px;
   font-size: 1.3em;
@@ -259,23 +273,23 @@
   display: flex;
   gap: 20px;
   width: 100%;
-  max-width: 100%; /* 默认（手机）最大宽度 */
+  max-width: 1200px; /* 调整最大宽度 */
   margin-bottom: 20px;
-  flex-wrap: wrap; /* 允许换行 */
+  flex-wrap: wrap;
   justify-content: center;
 }
 
 .solution-card {
-  flex: 1 1 100%; /* 默认（手机）占据整行 */
-  min-width: unset;
-  background-color: #ebebeb; /* 调整为灰色 */
+  flex: 1;
+  min-width: 700px; /* 最小宽度调整，以适应内容 */
+  background-color: #ebebeb;
   border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* 调整阴影 */
-  border: 1px solid #d0d0d0; /* 调整边框颜色 */
-  padding: 25px; /* 默认（手机）padding */
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  border: 1px solid #d0d0d0;
+  padding: 30px;
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 20px;
   box-sizing: border-box;
 }
 
@@ -351,141 +365,47 @@
   font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s ease, transform 0.2s ease;
-  align-self: center; /* 按钮居中 */
+  align-self: center;
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
 .start-detection-button:hover {
-  background-color: #218838; /* 改回绿色 hover 颜色 */
+  background-color: #218838;
   transform: translateY(-2px);
 }
 
 .image-display-card {
-  flex: 1 1 100%; /* 默认（手机）占据整行 */
-  min-width: unset;
-  background-color: #ebebeb; /* 调整为灰色 */
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* 调整阴影 */
-  border: 1px solid #d0d0d0; /* 调整边框颜色 */
-  padding: 25px; /* 默认（手机）padding */
+  display: none; /* 隐藏此卡片 */
+}
+
+/* 新增的样式来处理上传按钮的布局 */
+.upload-buttons {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  box-sizing: border-box;
-  overflow: hidden;
+  gap: 15px;
+  margin-top: 15px;
 }
 
-.detection-example-image {
-  max-width: 100%;
-  height: auto;
-  border-radius: 8px;
-  margin-bottom: 15px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  border: 2px solid #d0d0d0; /* 调整边框颜色 */
-}
-
-.image-info {
-  font-size: 0.9em;
-  color: #555; /* 调整文本颜色 */
-  text-align: center;
-  line-height: 1.5;
-}
-
-.detection-flow-section {
-  width: 100%;
-  max-width: 100%; /* 默认（手机）最大宽度 */
-  background-color: #ebebeb; /* 调整为灰色 */
-  border-radius: 12px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* 调整阴影 */
-  border: 1px solid #d0d0d0; /* 调整边框颜色 */
-  padding: 25px; /* 默认（手机）padding */
-  text-align: center;
-  box-sizing: border-box;
-}
-
-.detection-flow-section h3 {
-  color: #28a745; /* 改回绿色 */
-  font-size: 1.1em;
-  margin-bottom: 8px;
-  font-weight: 600;
-}
-
-.detection-flow-section h2 {
-  font-size: 1.8em;
-  color: #2c3e50; /* 调整标题颜色 */
-  margin-top: 0;
-  margin-bottom: 15px;
-  font-weight: 700;
-}
-
-.flow-description {
-  font-size: 1em;
-  color: #555; /* 调整文本颜色 */
-  margin-bottom: 40px;
-}
-
-.flow-steps {
-  display: flex;
-  justify-content: center;
-  gap: 50px;
-  margin-top: 30px;
-}
-
-.flow-step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  position: relative;
-}
-
-.flow-step .step-number {
-  width: 50px;
-  height: 50px;
-  background-color: #28a745; /* 改回绿色 */
+.custom-file-upload {
+  background-color: #007bff;
   color: white;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 1.8em;
-  font-weight: 700;
-  box-shadow: 0 4px 10px rgba(40, 167, 69, 0.3); /* 改回绿色阴影 */
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  font-size: 1em;
 }
 
-.flow-step p {
-  font-size: 1.05em;
-  color: #333; /* 调整文本颜色 */
-  font-weight: 500;
-  margin: 0;
+.custom-file-upload:hover {
+  background-color: #0056b3;
 }
 
-.flow-steps .flow-step:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  left: calc(100% + 15px); /* 箭头起点 */
-  top: 50%;
-  transform: translateY(-50%);
-  width: 40px; /* 箭头线长 */
-  height: 2px;
-  background-color: #ccc; /* 调整颜色 */
-  z-index: 1;
-}
-
-.flow-steps .flow-step:not(:last-child)::before {
-  content: '';
-  position: absolute;
-  left: calc(100% + 55px); /* 箭头尖部起点 */
-  top: 50%;
-  transform: translateY(-50%) rotate(45deg);
-  width: 10px;
-  height: 10px;
-  border-top: 2px solid #ccc; /* 调整颜色 */
-  border-right: 2px solid #ccc; /* 调整颜色 */
-  z-index: 1;
+.selected-file-name {
+  font-size: 1em;
+  color: #555;
 }
 
 @media (max-width: 992px) {
@@ -494,7 +414,7 @@
     align-items: center;
   }
 
-  .solution-card, .image-display-card {
+  .solution-card {
     min-width: unset;
     width: 90%;
   }
@@ -537,7 +457,7 @@
     padding: 10px;
   }
 
-  .solution-card, .image-display-card, .detection-flow-section {
+  .solution-card {
     width: 95%;
     padding: 20px;
   }
@@ -587,14 +507,17 @@
   }
 
   .upload-section input[type="file"] {
-    padding: 10px;
-    font-size: 0.95em;
+    display: none; /* 隐藏文件选择器 */
   }
 
   .upload-section input[type="file"]::file-selector-button {
     padding: 8px 15px;
     font-size: 0.9em;
     margin-right: 15px;
+  }
+
+  .upload-section button {
+    display: none; /* 隐藏此处的点击检测按钮 */
   }
 
   .image-preview h2 {
@@ -683,7 +606,7 @@
     padding: 8px;
   }
 
-  .solution-card, .image-display-card, .detection-flow-section {
+  .solution-card {
     width: 100%;
     padding: 15px;
   }
@@ -731,14 +654,17 @@
   }
 
   .upload-section input[type="file"] {
-    padding: 8px;
-    font-size: 0.85em;
+    display: none; /* 隐藏文件选择器 */
   }
 
   .upload-section input[type="file"]::file-selector-button {
     padding: 6px 12px;
     font-size: 0.8em;
     margin-right: 10px;
+  }
+
+  .upload-section button {
+    display: none; /* 隐藏此处的点击检测按钮 */
   }
 
   .image-preview h2 {

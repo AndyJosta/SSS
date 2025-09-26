@@ -22,10 +22,12 @@ import TeaPerson from './TeaPerson'; // 导入 TeaPerson 组件
 import './HomePage.css';
 import logLogo from '../img/log.png'; // 导入 log.png 作为 Logo
 // import githubLogo from '../img/github-mark-white.png'; // 导入 GitHub Logo (已注释掉，因为文件不存在)
+// import EmptyPage5 from './EmptyPage5'; // 移除旧的 EmptyPage5 导入
 
 const HomePage = () => {
   const [isSidebarExpanded, setIsSidebarExpanded] = useState(true); // 默认展开侧边栏
   const [logoError, setLogoError] = useState(false);
+  const [repoSearchText, setRepoSearchText] = useState(''); // 用于“我的项目”搜索
 
   const toggleSidebar = () => {
     setIsSidebarExpanded(prevState => !prevState);
@@ -41,12 +43,12 @@ const HomePage = () => {
       type: 'links',
       title: '', // 顶部无标题部分
       items: [
-        { to: "/homepage/iot-dashboard", icon: faTachometerAlt, text: "环境监控" }, 
-        { to: "/homepage/user-management", icon: faUsers, text: "用户管理" }, 
-        { to: "/homepage/tea-detection", icon: faLeaf, text: "茶叶病虫检测" }, 
-        { to: "/homepage/blockchain", icon: faCube, text: "区块链" },
-        { to: "/homepage/data-analysis", icon: faChartLine, text: "数据分析" }, 
-        { to: "/homepage/device-alerts", icon: faBell, text: "设备预警" }, 
+        { to: "/homepage/iot", icon: faTachometerAlt, text: "环境监控" }, 
+        { to: "/homepage/yhgl", icon: faUsers, text: "用户管理" }, 
+        { to: "/homepage/cyjc", icon: faLeaf, text: "茶叶病虫检测" }, 
+        { to: "/homepage/qkl", icon: faCube, text: "区块链" },
+        { to: "/homepage/sjfx", icon: faChartLine, text: "数据分析" }, 
+        { to: "/homepage/sbyj", icon: faBell, text: "设备预警" }, 
         { to: "/homepage/settings", icon: faCog, text: "系统设置" }, 
       ]
     },
@@ -112,17 +114,27 @@ const HomePage = () => {
                   {section.title && <h3 className="sidebar-section-title">{section.title}</h3>}
                   <div className="sidebar-repo-search">
                     <FontAwesomeIcon icon={faSearch} />
-                    <input type="text" placeholder={section.searchPlaceholder} className="sidebar-search-input" />
+                    <input 
+                      type="text" 
+                      placeholder={section.searchPlaceholder} 
+                      className="sidebar-search-input" 
+                      value={repoSearchText} 
+                      onChange={(e) => setRepoSearchText(e.target.value)} 
+                    />
                   </div>
                   <ul className="sidebar-repo-list">
-                    {section.items.map((item, itemIndex) => (
-                      <li key={itemIndex}>
-                        <NavLink to={item.to}>
-                          <FontAwesomeIcon icon={item.icon} /> 
-                          <span className="sidebar-link-text">{item.text}</span>
-                        </NavLink>
-                      </li>
-                    ))}
+                    {section.items
+                      .filter(item => 
+                        item.text.toLowerCase().includes(repoSearchText.toLowerCase())
+                      )
+                      .map((item, itemIndex) => (
+                        <li key={itemIndex}>
+                          <NavLink to={item.to}>
+                            <FontAwesomeIcon icon={item.icon} /> 
+                            <span className="sidebar-link-text">{item.text}</span>
+                          </NavLink>
+                        </li>
+                      ))}
                   </ul>
                 </>)}
               </React.Fragment>

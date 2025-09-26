@@ -1,0 +1,183 @@
+:root {
+  --github-bg-primary: #f6f8fa; /* Main background */
+  --github-bg-secondary: #ffffff; /* Card background */
+  --github-border-color: #d0d7de; /* Border color */
+  --github-text-color: #24292f; /* Dark text */
+  --github-text-light: #57606a; /* Lighter text */
+  --github-link-color: #0969da; /* Link/Primary action color */
+  --github-btn-primary-bg: #2da44e; /* Primary button green */
+  --github-btn-primary-text: #ffffff;
+  --github-btn-secondary-bg: #f6f8fa; /* Secondary button light bg */
+  --github-btn-secondary-text: #24292f;
+  --github-input-border: #d0d7de;
+  --github-input-focus-border: #0969da;
+  --github-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset;
+  --github-danger-color: #cb2431; /* Red for delete actions */
+}
+
+.data-analysis-page {
+  padding: 30px;
+  max-width: 1200px;
+  margin: 30px auto;
+  background-color: var(--github-bg-primary);
+  border-radius: 6px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+.data-analysis-page h1 {
+  color: var(--github-text-color);
+  margin-bottom: 30px;
+  text-align: left;
+  font-size: 2em;
+  font-weight: 600;
+  border-bottom: 1px solid var(--github-border-color);
+  padding-bottom: 15px;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+.card-container {
+  background-color: var(--github-bg-secondary);
+  border: 1px solid var(--github-border-color);
+  border-radius: 6px;
+  padding: 25px;
+  box-shadow: var(--github-shadow);
+}
+
+.card-container h2 {
+  color: var(--github-text-color);
+  font-size: 1.5em;
+  margin-bottom: 20px;
+  border-bottom: 1px solid var(--github-border-color);
+  padding-bottom: 10px;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.card-container h2 svg {
+  color: var(--github-link-color);
+}
+
+/* Chart Overview Styles */
+.chart-overview p {
+  color: var(--github-text-color);
+  font-size: 0.95em;
+  margin-bottom: 15px;
+}
+
+.chart-overview ul {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 20px;
+}
+
+.chart-overview li {
+  color: var(--github-text-light);
+  font-size: 0.9em;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.chart-overview li svg {
+  color: var(--github-text-light);
+}
+
+/* Reports List Styles */
+.report-item {
+  border: 1px solid var(--github-border-color);
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background-color: var(--github-bg-primary);
+}
+
+.report-item h3 {
+  color: var(--github-link-color);
+  font-size: 1.1em;
+  margin-bottom: 8px;
+}
+
+.report-item p {
+  color: var(--github-text-color);
+  font-size: 0.9em;
+  margin-bottom: 5px;
+  line-height: 1.4;
+}
+
+.report-item p strong {
+  color: var(--github-text-light);
+}
+
+.report-item .secondary-button {
+  margin-top: 10px;
+  float: right; /* Align button to the right */
+}
+
+.no-reports {
+  color: var(--github-text-light);
+  text-align: center;
+  padding: 20px 0;
+  border: 1px dashed var(--github-border-color);
+  border-radius: 6px;
+  background-color: var(--github-bg-primary);
+  margin-bottom: 20px;
+}
+
+.add-report-button {
+  margin-top: 20px; /* Space above button */
+  width: auto; /* Allow button to size itself */
+}
+
+/* Generic Button Styles (GitHub Style) */
+.primary-button,
+.secondary-button {
+  padding: 8px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.9em;
+  font-weight: 500;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.primary-button {
+  background-color: var(--github-btn-primary-bg);
+  color: var(--github-btn-primary-text);
+}
+
+.primary-button:hover {
+  background-color: #2c974b; /* Darker green */
+  box-shadow: rgba(27, 31, 35, 0.1) 0px 4px 8px -2px, rgba(27, 31, 35, 0.06) 0px 2px 0px -2px;
+}
+
+.primary-button:active {
+  background-color: #22863a; /* Even darker green */
+  box-shadow: rgba(27, 31, 35, 0.1) 0px 1px 0px inset;
+}
+
+.secondary-button {
+  background-color: var(--github-btn-secondary-bg);
+  color: var(--github-btn-secondary-text);
+}
+
+.secondary-button:hover {
+  background-color: #ebf0f4; /* Slightly darker secondary bg on hover */
+  box-shadow: rgba(27, 31, 35, 0.1) 0px 4px 8px -2px, rgba(27, 31, 35, 0.06) 0px 2px 0px -2px;
+}
+
+.secondary-button:active {
+  background-color: #e0e4e8; /* Even darker secondary bg on active */
+  box-shadow: rgba(27, 31, 35, 0.1) 0px 1px 0px inset;
+}

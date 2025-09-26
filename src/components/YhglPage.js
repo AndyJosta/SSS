@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './UserManagementPage.css';
+import './YhglPage.css'; // 更新 CSS 导入路径
 
 const UserManagementPage = () => {
   // 增加 mock 用户数据，使其至少有 24 条记录以模拟分页

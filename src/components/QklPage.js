@@ -1,7 +1,7 @@
 import React from 'react';
-import './BlockchainPage.css';
+import './QklPage.css'; // 更新 CSS 导入路径
 
-const BlockchainPage = () => {
+const QklPage = () => { // 更新组件名称
   return (
     <div className="blockchain-container">
       <h1>区块链技术在茶叶溯源中的应用</h1>
@@ -51,4 +51,4 @@ const BlockchainPage = () => {
   );
 };
 
-export default BlockchainPage;
+export default QklPage;

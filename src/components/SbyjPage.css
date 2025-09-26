@@ -1,0 +1,138 @@
+:root {
+  --primary-color: #3498db;
+  --secondary-color: #2ecc71;
+  --danger-color: #e74c3c;
+  --text-color-dark: #2c3e50;
+  --text-color-medium: #7f8c8d;
+  --bg-light: #f9f9f9;
+  --bg-white: #ffffff;
+  --border-light: #eee;
+}
+
+.device-alert-page {
+  padding: 30px;
+  max-width: 900px;
+  margin: 30px auto;
+  background-color: var(--bg-white);
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.device-alert-page h1 {
+  color: var(--text-color-dark);
+  margin-bottom: 35px;
+  text-align: center;
+  font-size: 2.2em;
+  font-weight: 700;
+}
+
+.alert-list {
+  background-color: var(--bg-white);
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  overflow: hidden;
+}
+
+.alert-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 18px 25px;
+  border-bottom: 1px solid var(--border-light);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.alert-item:hover {
+  background-color: rgba(0, 0, 0, 0.02);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.07);
+}
+
+.alert-item:last-child {
+  border-bottom: none;
+}
+
+.alert-item.unresolved {
+  background-color: #fff8f8; /* 更柔和的红色背景 */
+  border-left: 6px solid var(--danger-color);
+}
+
+.alert-item.resolved {
+  background-color: #f8fff8; /* 更柔和的绿色背景 */
+  border-left: 6px solid var(--secondary-color);
+}
+
+.alert-info {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  gap: 8px;
+}
+
+.device-name {
+  font-weight: 600;
+  color: var(--text-color-dark);
+  font-size: 1.2em;
+}
+
+.alert-type {
+  color: var(--danger-color);
+  font-size: 1em;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.timestamp {
+  color: var(--text-color-medium);
+  font-size: 0.9em;
+}
+
+.alert-status {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.alert-status span {
+  font-weight: 600;
+  color: var(--text-color-dark);
+  font-size: 1em;
+}
+
+.resolve-button {
+  background-color: var(--primary-color);
+  color: var(--bg-white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.95em;
+  font-weight: 500;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+  box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+  outline: none; /* 移除聚焦时的默认边框 */
+}
+
+.resolve-button:hover {
+  background-color: #2980b9;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+}
+
+.resolve-button:active {
+  transform: translateY(0);
+  box-shadow: 0 1px 4px rgba(52, 152, 219, 0.2);
+}
+
+.no-alerts {
+  text-align: center;
+  color: var(--text-color-medium);
+  font-size: 1.1em;
+  padding: 30px;
+  background-color: var(--bg-light);
+  border-radius: 8px;
+  margin-top: 20px;
+}

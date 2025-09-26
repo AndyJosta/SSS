@@ -1,0 +1,17 @@
+.card-container h2 svg {
+  color: var(--github-link-color); /* Change icon color to link color */
+}
+
+/* Device Management Styles */
+.device-list-container {
+  font-weight: 400;
+  color: var(--github-text-color);
+  font-size: 0.9em;
+}
+
+.add-device-form input[type="text"] {
+  box-shadow: rgba(27, 31, 35, 0.1) 0px 1px 0px inset;
+}
+
+.no-devices {
+

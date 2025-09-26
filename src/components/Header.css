@@ -18,10 +18,12 @@
 /* 默认（手机）标题选择器 */
 h1.app-title {
   margin: 0;
-  font-size: 1.5em; /* 调整字体大小，适配手机 */
-  font-weight: 700; /* 更粗的字体 */
-  letter-spacing: 0.8px; /* 增加字母间距 */
-  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3); /* 增加文字阴影 */
+  font-family: 'Zhi Mang Xing', cursive; /* 应用艺术字体 */
+  font-size: 1.8em; /* 调整字体大小，使其更具视觉冲击力 */
+  font-weight: 400; /* 艺术字体通常不需要太粗 */
+  letter-spacing: 2px; /* 增加字母间距，增强艺术感 */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5); /* 调整文字阴影，使其更突出 */
+  color: #a4e6ba; /* 浅绿色，与茶叶主题更贴合 */
 }
 
 .logo-group {
@@ -56,30 +58,88 @@ h1.app-title {
   transform: scale(1.1);
 }
 
+/* 新增的搜索结果下拉框样式 */
 .header-search-container {
-  display: flex; /* 默认（桌面）显示搜索栏 */
-  align-items: center;
-  background-color: #161b22; /* 搜索框背景色 */
+  position: relative; /* 确保下拉框相对于搜索框定位 */
+}
+
+.search-results-dropdown {
+  position: absolute;
+  top: 100%; /* 位于搜索框下方 */
+  left: 0;
+  width: 100%;
+  background-color: #161b22; /* 与搜索框背景色一致 */
   border: 1px solid #30363d;
-  border-radius: 6px;
-  padding: 8px 12px;
-  flex-grow: 1; /* 占据可用空间 */
-  max-width: 400px; /* 最大宽度 */
-  margin: 0 20px; /* 左右间距 */
+  border-top: none; /* 避免双重边框 */
+  border-radius: 0 0 6px 6px; /* 底部圆角 */
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 200px; /* 限制最大高度，可滚动 */
+  overflow-y: auto;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  z-index: 1001; /* 确保在其他内容之上 */
+}
+
+.search-results-dropdown li {
+  padding: 10px 12px;
+  cursor: pointer;
+  color: #c9d1d9;
+  transition: background-color 0.2s ease;
+}
+
+.search-results-dropdown li:hover {
+  background-color: #007acc; /* 悬停时蓝色背景 */
+}
+
+.search-results-dropdown .no-results {
+  color: #8b949e;
+  text-align: center;
+  padding: 10px 12px;
+  cursor: default;
+}
+
+/* 媒体查询中也需要考虑搜索框的样式 */
+@media (max-width: 768px) {
+  .header-search-container {
+    display: block; /* 在手机端显示搜索框 */
+    position: absolute; /* 使其脱离文档流，可以自由定位 */
+    top: 60px; /* 位于 header 下方 */
+    left: 0;
+    width: 100%;
+    max-width: none; /* 占用全部宽度 */
+    border-radius: 0; /* 移除圆角 */
+    border-left: none;
+    border-right: none;
+    z-index: 999; /* 确保在 header 之下，但高于页面内容 */
+    background-color: #0d1117; /* 与 header 背景色一致 */
+    padding: 8px 15px; /* 调整内边距 */
+  }
+
+  .search-results-dropdown {
+    top: 100%; /* 确保在搜索框下方 */
+    border-radius: 0 0 6px 6px; /* 手机端依然保持底部圆角 */
+  }
+}
+
+.header-search-container:focus-within {
+  border-color: #0969da; /* 聚焦时边框变蓝 */
+  box-shadow: 0 0 0 3px rgba(9, 105, 218, 0.3); /* 聚焦时蓝色阴影 */
 }
 
 .header-search-container .search-icon {
   color: #8b949e;
-  margin-right: 6px;
+  margin-right: 8px; /* 调整间距 */
   font-size: 1em;
 }
 
 .header-search-input {
-  background-color: #161b22; /* 将背景色设置为与容器一致的深色 */
+  background-color: transparent; /* 将背景色设置为透明 */
   border: none;
   color: #c9d1d9;
   flex-grow: 1;
   outline: none;
+  font-size: 0.95em; /* 调整字体大小 */
 }
 
 .header-search-input:focus {
@@ -98,23 +158,34 @@ h1.app-title {
 
 .notification-icon-container {
   position: relative;
-  margin-right: 15px; /* 右侧间距 */
+  margin-right: 20px; /* 调整右侧间距 */
   cursor: pointer;
 }
 
 .notification-icon {
-  color: #8b949e;
-  font-size: 1.4em;
-  transition: color 0.2s ease;
+  color: #8b949e; /* 默认图标颜色 */
+  font-size: 1.5em; /* 调整图标大小 */
+  transition: color 0.2s ease, transform 0.2s ease; /* 添加过渡效果 */
 }
 
 .notification-icon:hover {
-  color: #c9d1d9;
+  color: #c9d1d9; /* 悬停时颜色变亮 */
+  transform: scale(1.1); /* 悬停时轻微放大 */
 }
 
 .notification-badge {
-  font-size: 0.7em;
-  min-width: 14px;
+  position: absolute;
+  top: -8px; /* 调整位置 */
+  right: -8px; /* 调整位置 */
+  background-color: #f85149; /* GitHub 红色 */
+  color: white;
+  font-size: 0.75em; /* 调整字体大小 */
+  font-weight: 600;
+  padding: 2px 6px; /* 调整内边距 */
+  border-radius: 50%; /* 圆角 */
+  min-width: 18px; /* 最小宽度 */
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* 添加阴影 */
 }
 
 .header-right {
@@ -129,12 +200,25 @@ h1.app-title {
 
 .main-nav .logout-button {
   padding: 8px 15px;
-  font-size: 0.95em;
+  font-size: 0.9em; /* 调整字体大小 */
+  background-color: #cb2431; /* GitHub 红色用于危险操作 */
+  color: white;
+  border: 1px solid rgba(27, 31, 35, 0.15); /* 统一边框 */
+  border-radius: 6px; /* 统一圆角 */
+  cursor: pointer;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease; /* 统一过渡 */
+  box-shadow: rgba(27, 31, 35, 0.04) 0px 1px 0px, rgba(255, 255, 255, 0.25) 0px 1px 0px inset; /* 统一阴影 */
 }
 
 .main-nav .logout-button:hover {
-  background-color: #c0392b;
-  transform: translateY(-2px);
+  background-color: #b31d28; /* Darker red */
+  transform: none; /* 移除 translateY 效果 */
+  box-shadow: rgba(27, 31, 35, 0.1) 0px 4px 8px -2px, rgba(27, 31, 35, 0.06) 0px 2px 0px -2px;
+}
+
+.main-nav .logout-button:active {
+  background-color: #a01a24; /* Even darker red */
+  box-shadow: rgba(27, 31, 35, 0.1) 0px 1px 0px inset;
 }
 
 /* 汉堡包菜单样式已移除 */
@@ -146,26 +230,22 @@ h1.app-title {
   }
 
   h1.app-title {
-    font-size: 2em;
+    font-size: 2.2em; /* 桌面端标题字体更大 */
   }
 
   .app-header-logo {
     height: 40px;
-    display: block; /* 确保桌面端 Logo 显示 */
+    display: block;
   }
 
   .app-header-logo-fallback-icon {
     font-size: 2.2em;
   }
 
-  .hamburger-menu {
-    /* display: none; 桌面端隐藏汉堡包菜单 */
-  }
-
   .header-search-container {
-    max-width: 500px; /* 桌面端搜索框更大 */
-    display: flex; /* 桌面端显示搜索框 */
-    flex-grow: 1; /* 占据可用空间 */
+    max-width: 500px;
+    display: flex;
+    flex-grow: 1;
     margin: 0 20px;
   }
 
@@ -182,33 +262,44 @@ h1.app-title {
 /* 手机端（小于等于 768px）的样式调整 */
 @media (max-width: 768px) {
   .app-header {
-    padding: 8px 10px; /* 手机端更小的填充 */
-    height: 50px; /* 手机端头部高度 */
+    padding: 8px 10px;
+    height: 50px;
   }
 
   .app-header-logo {
-    height: 25px; /* 手机端logo更小 */
+    height: 25px;
   }
 
   h1.app-title {
-    font-size: 1.4em; /* 手机端标题字体更小 */
+    font-size: 1.6em; /* 手机端标题字体调整 */
   }
 
   .hamburger-menu {
-    display: block; /* 手机端显示汉堡包菜单 */
-    font-size: 1.2em;
+    display: block;
+    font-size: 1.3em; /* 调整汉堡包菜单字体大小 */
   }
 
   .header-search-container {
-    display: none; /* 手机端隐藏搜索框 */
+    display: none;
   }
 
   .header-right {
-    display: none; /* 手机端隐藏用户信息 */
+    display: none;
   }
 
   .notification-icon-container {
-    margin-right: 10px; /* 手机端通知图标间距 */
+    margin-right: 10px;
+  }
+
+  .notification-icon {
+    font-size: 1.3em; /* 调整通知图标大小 */
+  }
+
+  .notification-badge {
+    font-size: 0.7em;
+    min-width: 14px;
+    top: -6px;
+    right: -6px;
   }
 }
 
@@ -218,44 +309,8 @@ h1.app-title {
   }
 
   h1.app-title {
-    font-size: 1.3em;
-  }
-
-  .app-header-logo {
-    height: 25px;
-  }
-
-  .app-header-logo-fallback-icon {
-    font-size: 1.4em;
-  }
-
-  .hamburger-menu {
-    font-size: 1.3em;
-  }
-
-  .notification-icon-container {
-    margin-right: 10px;
-  }
-
-  .notification-icon {
-    font-size: 1.3em;
-  }
-
-  .notification-badge {
-    font-size: 0.65em;
-    min-width: 13px;
-    top: -6px;
-    right: -6px;
-  }
-}
-
-@media (max-width: 375px) { /* 针对更小尺寸的手机 */
-  .app-header {
-    padding: 5px 8px;
-  }
-
-  h1.app-title {
-    font-size: 1.2em;
+    font-size: 1.4em; /* 更小屏幕标题字体进一步调整 */
+    letter-spacing: 1px;
   }
 
   .app-header-logo {
@@ -263,7 +318,7 @@ h1.app-title {
   }
 
   .app-header-logo-fallback-icon {
-    font-size: 1.3em;
+    font-size: 1.4em;
   }
 
   .hamburger-menu {
@@ -279,9 +334,47 @@ h1.app-title {
   }
 
   .notification-badge {
-    font-size: 0.6em;
-    min-width: 12px;
+    font-size: 0.65em;
+    min-width: 13px;
     top: -5px;
     right: -5px;
+  }
+}
+
+@media (max-width: 375px) {
+  .app-header {
+    padding: 5px 8px;
+  }
+
+  h1.app-title {
+    font-size: 1.2em;
+    letter-spacing: 0.8px;
+  }
+
+  .app-header-logo {
+    height: 20px;
+  }
+
+  .app-header-logo-fallback-icon {
+    font-size: 1.2em;
+  }
+
+  .hamburger-menu {
+    font-size: 1.1em;
+  }
+
+  .notification-icon-container {
+    margin-right: 6px;
+  }
+
+  .notification-icon {
+    font-size: 1.1em;
+  }
+
+  .notification-badge {
+    font-size: 0.55em;
+    min-width: 11px;
+    top: -4px;
+    right: -4px;
   }
 }

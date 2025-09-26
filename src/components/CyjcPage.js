@@ -1,5 +1,6 @@
-import React, { useState } from 'react';
-import './TeaDetectionPage.css';
+import React, { useState, useRef } from 'react';
+import './CyjcPage.css'; // 更新 CSS 导入路径
+import Loader from './Loader'; // 导入 Loader 组件
 
 const TeaDetectionPage = () => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -8,6 +9,7 @@ const TeaDetectionPage = () => {
   const [progress, setProgress] = useState(0);
   const [detectionResult, setDetectionResult] = useState(null);
   const [isDragOver, setIsDragOver] = useState(false); // 新增状态来管理拖拽样式
+  const detectionResultsRef = useRef(null); // 为检测结果区域创建ref
 
   const handleImageChange = (event) => {
     const file = event.target.files[0];
@@ -87,6 +89,13 @@ const TeaDetectionPage = () => {
         ],
       };
       setDetectionResult(mockResults);
+      // 检测完成后滚动到结果区域
+      if (detectionResultsRef.current) {
+        console.log('Scrolling to detection results...', detectionResultsRef.current);
+        detectionResultsRef.current.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        console.log('detectionResultsRef.current is null, cannot scroll.');
+      }
     } catch (error) {
       console.error('检测失败:', error);
       setDetectionResult({ disease: '检测失败', confidence: '-', suggestions: ['请检查网络或重试。'] });
@@ -104,7 +113,7 @@ const TeaDetectionPage = () => {
           <div className="tag">智能农业解决方案</div>
           <h2>精准检测茶叶病虫害<br />区块链保障数据可信</h2>
           <p>
-            基于YOLOv8深度学习模型,实现茶叶病虫害的快速识别与分类,检测准确率高达98%以上。所有检测结果通过区块链技术存证,确保数据不可篡改、可追溯,为茶叶质量管控提供可靠依据。
+            基于YOLOv11深度学习模型,实现茶叶病虫害的快速识别与分类,检测准确率高达98%以上。所有检测结果通过区块链技术存证,确保数据不可篡改、可追溯,为茶叶质量管控提供可靠依据。
           </p>
           <div className="features-grid">
             <div className="feature-item">
@@ -115,7 +124,7 @@ const TeaDetectionPage = () => {
             <div className="feature-item">
               <span className="icon">✅</span>
               <p>高准确率</p>
-              <span>>98%识别率</span>
+              <span>&gt;98%识别率</span>
             </div>
             <div className="feature-item">
               <span className="icon">🔒</span>
@@ -123,13 +132,13 @@ const TeaDetectionPage = () => {
               <span>数据不可篡改</span>
             </div>
           </div>
-          <button className="start-detection-button" onClick={handleDetect} disabled={loading}>
-            开始检测
-          </button>
 
           {loading && (
             <div className="loading-indicator">
               <p>检测中... {progress}%</p>
+              <div className="loader-wrapper"> {/* 添加一个包裹容器 */}
+                <Loader />
+              </div>
               <div className="progress-bar-container">
                 <div className="progress-bar" style={{ width: `${progress}%` }}>
                   {progress}%
@@ -139,7 +148,7 @@ const TeaDetectionPage = () => {
           )}
 
           {detectionResult && !loading && (
-            <div className="detection-results">
+            <div className="detection-results" ref={detectionResultsRef}>
               <h2>检测结果</h2>
               <p>检测到的病虫害: <strong>{detectionResult.disease}</strong></p>
               <p>识别置信度: <strong>{detectionResult.confidence}</strong></p>
@@ -151,20 +160,11 @@ const TeaDetectionPage = () => {
               </ul>
             </div>
           )}
-        </div>
 
-        <div className="image-display-card">
-          {!selectedImage && !previewUrl ? (
-            <div className="initial-prompt">
-              <p>请拖拽图片到下方区域或点击选择图片</p>
-              <p>支持 JPG, PNG, JPEG 等格式</p>
-            </div>
-          ) : (
-            <div className="image-preview">
-              <h2>图片预览</h2>
-              {previewUrl && <img src={previewUrl} alt="预览" />}
-            </div>
-          )}
+          <button className="start-detection-button" onClick={handleDetect} disabled={loading}>
+            开始检测
+          </button>
+
           <div
             className={`upload-section ${isDragOver ? 'drag-over' : ''}`}
             onDragOver={handleDragOver}
@@ -172,36 +172,33 @@ const TeaDetectionPage = () => {
             onDrop={handleDrop}
           >
             <p>拖拽图片到此处上传</p>
-            <input type="file" accept="image/*" onChange={handleImageChange} />
-            <button onClick={handleDetect} disabled={loading}>
+            {!selectedImage && !previewUrl ? (
+              <div className="initial-prompt">
+                <p>请拖拽图片到下方区域或点击选择图片</p>
+                <p>支持 JPG, PNG, JPEG 等格式</p>
+              </div>
+            ) : (
+              <div className="image-preview">
+                <h2>图片预览</h2>
+                {previewUrl && <img src={previewUrl} alt="预览" onClick={() => window.open(previewUrl, '_blank')} />}
+              </div>
+            )}
+            {/* <input type="file" accept="image/*" onChange={handleImageChange} /> */}
+            <div className="upload-buttons">
+              <label htmlFor="file-upload" className="custom-file-upload">
+                上传图片
+              </label>
+              <input id="file-upload" type="file" accept="image/*" onChange={handleImageChange} style={{ display: 'none' }} />
+              <span className="selected-file-name">{selectedImage ? selectedImage.name : '未选择文件'}</span>
+            </div>
+            {/* <button onClick={handleDetect} disabled={loading}>
               点击检测
-            </button>
+            </button> */}
           </div>
-          <div className="image-info">
+          {/* <div className="image-info">
             检测示例:茶小绿叶蝉<br />识别置信度:99.2%
-          </div>
+          </div> */}
         </div>
-      </div>
-
-      <div className="detection-flow-section">
-        <h3>检测流程</h3>
-        <h2>上传茶叶图片进行检测</h2>
-        <p className="flow-description">请上传清晰的茶叶叶片照片(建议分辨率800×600以上),系统将自动识别并标记病虫害区域</p>
-        <div className="flow-steps">
-          <div className="flow-step">
-            <div className="step-number">1</div>
-            <p>上传图片</p>
-          </div>
-          <div className="flow-step">
-            <div className="step-number">2</div>
-            <p>AI检测</p>
-          </div>
-          <div className="flow-step">
-            <div className="step-number">3</div>
-            <p>查看结果</p>
-          </div>
-        </div>
-        {/* 这里可以添加文件上传区域 */}
       </div>
     </div>
   );

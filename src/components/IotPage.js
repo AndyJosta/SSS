@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-import './IotDashboardPage.css';
+import './IotPage.css'; // 更新 CSS 导入路径
 
 const IotDashboardPage = () => {
   // const [currentTime, setCurrentTime] = useState(''); // 移除未使用的 currentTime 状态

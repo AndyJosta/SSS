@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Form from './Form';
+import RegistrationModal from './RegistrationModal';
 import './Login.css';
 
 const Login = () => {
-  const [isRegister, setIsRegister] = useState(false);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
+  const [isRegistrationModalOpen, setIsRegistrationModalOpen] = useState(false);
+  const [registrationError, setRegistrationError] = useState('');
+  const [phoneNumber, setPhoneNumber] = useState('');
+  const [verificationCode, setVerificationCode] = useState('');
+  const [isSendingCode, setIsSendingCode] = useState(false);
   const navigate = useNavigate();
 
-  const validateForm = () => {
+  const validateLoginForm = () => {
     setError('');
     if (!username || !password) {
       setError('用户名和密码不能为空。');
@@ -20,24 +25,34 @@ const Login = () => {
       setError('密码长度不能少于6位。');
       return false;
     }
-    if (isRegister && password !== confirmPassword) {
-      setError('两次输入的密码不一致！');
+    return true;
+  };
+
+  const validatePhoneLoginForm = () => {
+    setError('');
+    if (!phoneNumber) {
+      setError('手机号不能为空。');
       return false;
     }
+    if (!verificationCode) {
+      setError('验证码不能为空。');
+      return false;
+    }
+    // 可以在这里添加手机号和验证码的格式验证
     return true;
   };
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
-    if (!validateForm()) {
+    if (!validateLoginForm()) {
       return;
     }
     console.log('Login submitted', { username, password });
     // 模拟登录成功
-    if (username === 'admin' && password === 'admin123') { // 示例管理员账户
+    if (username === 'admin' && password === 'admin123') {
       localStorage.setItem('userRole', 'admin');
       navigate('/homepage');
-    } else if (username === 'user' && password === 'user123') { // 示例普通用户账户
+    } else if (username === 'user' && password === 'user123') {
       localStorage.setItem('userRole', 'user');
       navigate('/homepage');
     } else {
@@ -45,68 +60,78 @@ const Login = () => {
     }
   };
 
-  const handleRegisterSubmit = (e) => {
+  const handlePhoneLoginSubmit = (e) => {
     e.preventDefault();
-    if (!validateForm()) {
+    if (!validatePhoneLoginForm()) {
       return;
     }
-    console.log('Register submitted', { username, password });
-    // 注册时默认创建普通用户，如果需要创建管理员，可以在这里添加逻辑判断
-    localStorage.setItem('userRole', 'user'); // 注册成功后默认设置为普通用户
+    console.log('Phone Login submitted', { phoneNumber, verificationCode });
+    // 模拟手机号登录成功
+    if (phoneNumber === '12345678900' && verificationCode === '123456') { // 示例手机号和验证码
+      localStorage.setItem('userRole', 'user');
+      navigate('/homepage');
+    } else {
+      setError('手机号或验证码错误。');
+    }
+  };
+
+  const handleRegistrationSubmit = ({ username: regUsername, email: regEmail, password: regPassword }) => {
+    setRegistrationError('');
+    if (!regUsername || !regEmail || !regPassword) {
+      setRegistrationError('所有字段不能为空。');
+      return false;
+    }
+    if (regPassword.length < 6) {
+      setRegistrationError('密码长度不能少于6位。');
+      return false;
+    }
+    console.log('Registration submitted', { regUsername, regEmail, regPassword });
+    // 模拟注册成功
+    localStorage.setItem('userRole', 'user');
     alert('注册成功！请登录。');
-    setIsRegister(false);
+    setIsRegistrationModalOpen(false);
+    setRegistrationError('');
+    return true;
+  };
+
+  const handleSendVerificationCode = async () => {
+    if (!phoneNumber) {
+      setError('请输入手机号。');
+      return;
+    }
+    setIsSendingCode(true);
+    console.log('Sending verification code to', phoneNumber);
+    // 模拟发送验证码的API调用
+    await new Promise(resolve => setTimeout(resolve, 2000));
+    alert(`验证码已发送到 ${phoneNumber}，请查收！`);
+    setIsSendingCode(false);
   };
 
   return (
-    <div className="login-container">
-      <h2>{isRegister ? '注册' : '登录'}</h2>
-      <form onSubmit={isRegister ? handleRegisterSubmit : handleLoginSubmit}>
-        {error && <p className="error-message">{error}</p>}
-        <div className="form-group">
-          <label htmlFor="username">用户名:</label>
-          <input
-            type="text"
-            id="username"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">密码:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        {isRegister && (
-          <div className="form-group">
-            <label htmlFor="confirm-password">确认密码:</label>
-            <input
-              type="password"
-              id="confirm-password"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-            />
-          </div>
-        )}
-        <button type="submit">
-          {isRegister ? '注册' : '登录'}
-        </button>
-      </form>
-      <button className="toggle-button" onClick={() => {
-        setIsRegister(!isRegister);
-        setError(''); // 清除错误信息
-        setUsername('');
-        setPassword('');
-        setConfirmPassword('');
-      }}>
-        {isRegister ? '已有账户？去登录' : '没有账户？去注册'}
-      </button>
+    <div className="login-page-container">
+      <Form
+        username={username}
+        password={password}
+        error={error}
+        onUsernameChange={setUsername}
+        onPasswordChange={setPassword}
+        onLoginSubmit={handleLoginSubmit}
+        onToggleRegister={() => setIsRegistrationModalOpen(true)}
+        
+        phoneNumber={phoneNumber}
+        verificationCode={verificationCode}
+        onPhoneNumberChange={setPhoneNumber}
+        onVerificationCodeChange={setVerificationCode}
+        onSendVerificationCode={handleSendVerificationCode}
+        onPhoneLoginSubmit={handlePhoneLoginSubmit}
+      />
+
+      <RegistrationModal
+        isOpen={isRegistrationModalOpen}
+        onClose={() => setIsRegistrationModalOpen(false)}
+        onRegisterSubmit={handleRegistrationSubmit}
+        error={registrationError}
+      />
     </div>
   );
 };
