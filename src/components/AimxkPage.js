@@ -8,6 +8,7 @@ import {
 // 导入模拟图片
 import teaLeafModelImg from '../img/bj1.png';
 import earlyWarningModelImg from '../img/bj2.png';
+import teaPestModelImg from '../img/bj3.png'; // 导入 bj3.png
 
 const AiModelLibraryPage = () => {
   const [models, setModels] = useState([
@@ -15,7 +16,7 @@ const AiModelLibraryPage = () => {
       id: 1,
       type: 'pest',
       category: '虫害模型',
-      image: teaLeafModelImg,
+      image: teaPestModelImg, // 使用 bj3.png
       name: '茶小绿叶蝉识别模型',
       accuracy: '97.2%',
       description: '专门识别茶小绿叶蝉及其危害症状，支持不同生长阶段的叶片识别，适用于各类茶园环境。',
@@ -25,7 +26,7 @@ const AiModelLibraryPage = () => {
       id: 2,
       type: 'disease',
       category: '病害模型',
-      image: 'https://images.unsplash.com/photo-1579606277717-d5d301b1a4a4?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D', // 直接使用 URL 字符串
+      image: teaLeafModelImg, // 使用 bj1.png
       name: '茶炭疽病识别模型',
       accuracy: '95.8%',
       description: '精准识别茶炭疽病的早期和中期症状，能够区分与其他叶部病害的差异，辅助及时防治。',

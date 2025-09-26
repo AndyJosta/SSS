@@ -8,6 +8,7 @@
   font-family: 'Roboto', sans-serif;
   color: #c9d1d9; /* 浅色文本 */
   min-height: calc(100vh - 60px); /* 减去 header 高度 */
+  position: relative; /* 添加相对定位 */
 }
 
 .hero-section {
@@ -489,4 +490,9 @@
     font-size: 1.3em;
     margin-top: 60px;
   }
+}
+
+.ai-model-library-container > .model-tag.disease-tag,
+.ai-model-library-container > .model-tag.early-warning-tag {
+  display: none !important;
 }

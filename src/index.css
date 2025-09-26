@@ -12,3 +12,18 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+/* 隐藏独立的模型标签，避免与页面内容冲突 */
+.model-tag:not(.model-card .model-tag),
+/* 针对可能是直接子元素的场景，再次尝试隐藏 */
+.app-layout > .model-tag,
+.homepage-container > .model-tag,
+.ai-model-library-container > .model-tag,
+.model-tag.pest-tag:not(.model-card .model-tag) {
+  display: none !important;
+}
+
+/* 尝试隐藏悬停时出现的错位模型标签 */
+.model-tag:not(.model-card .model-tag):hover {
+  display: none !important;
+}
