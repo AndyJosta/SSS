@@ -476,7 +476,13 @@
   .main-content {
     margin-left: 0; /* 手机端主内容无左边距 */
     width: 100%;
-    padding: 15px;
+    padding: 10px; /* 减少主内容区域的填充 */
+  }
+
+  .homepage-container {
+    padding-top: 50px; /* 调整为手机端头部高度 */
+    padding-left: 0; /* 移除左侧填充 */
+    padding-right: 0; /* 移除右侧填充 */
   }
 }
 
